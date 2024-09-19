@@ -34,7 +34,7 @@ function RenderCustomBarChart({ data }: { data: Driver[] | Team[] }) {
   return (
     <ResponsiveContainer width="100%" height={400}>
       <BarChart data={data}>
-        <XAxis tick={false} label={{ value: `${data.length === 10 ? "Teams" : "Drivers"}`, position: "insideBottom" }} />
+        <XAxis dataKey={data.length === 10 ? "name" : "short-name"} />
         <YAxis label={{ value: "Points", angle: -90, position: "insideLeft", offset: 10 }} />
 
         <Tooltip content={<CustomTooltip />} />
