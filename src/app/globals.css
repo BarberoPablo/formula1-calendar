@@ -25,3 +25,8 @@ body {
     text-wrap: balance;
   }
 }
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 24px;
+}
