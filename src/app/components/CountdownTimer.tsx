@@ -30,13 +30,16 @@ export default function CountdownTimer() {
   return (
     <div className="bg-white p-6 rounded-lg shadow-lg">
       <h2 className="text-2xl font-bold mb-4 text-center text-[#e10600]">Next Race In</h2>
-      <div className="flex space-x-4">
-        {Object.entries(timeLeft).map(([unit, value]) => (
-          <div key={unit} className="flex flex-col items-center">
-            <span className="text-3xl font-bold text-[#e10600]">{value}</span>
-            <span className="text-sm text-gray-500">{unit}</span>
-          </div>
-        ))}
+      <div className="flex flex-col items-center">
+        <span className="font-bold">Days:Hours:Minutes:Seconds</span>
+        <div className="flex">
+          {Object.entries(timeLeft).map(([unit, value], index) => (
+            <div key={unit} className="flex items-center">
+              <span className="text-3xl font-bold text-[#e10600]">{value < 10 ? `0${value}` : value}</span>
+              {index !== 3 && <span className="text-3xl font-bold text-[#e10600]">:</span>}
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

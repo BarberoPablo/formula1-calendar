@@ -45,7 +45,7 @@ export default function Calendar() {
       days.push(
         <div
           key={day}
-          className={`h-12 flex items-center justify-center ${race ? "bg-[#e10600] text-white cursor-pointer" : "text-gray-700"}`}
+          className={`h-12 flex items-center justify-center ${race && "bg-[#e10600] text-white cursor-pointer"}`}
           onClick={() => race && handleRaceClick(race)}
         >
           {day}
@@ -90,8 +90,8 @@ export default function Calendar() {
             className="mt-8 bg-white p-6 rounded-lg shadow-lg"
           >
             <h3 className="text-xl font-bold mb-2">{selectedRace.name}</h3>
-            <p className="text-gray-600 mb-2">Date: {new Date(selectedRace.date).toLocaleDateString()}</p>
-            <p className="text-gray-600">Circuit: {selectedRace.circuit}</p>
+            <p className="mb-2">Date: {new Date(selectedRace.date).toLocaleDateString()}</p>
+            <p>Circuit: {selectedRace.circuit}</p>
           </motion.div>
         )}
       </AnimatePresence>

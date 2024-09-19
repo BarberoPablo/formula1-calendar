@@ -20,7 +20,7 @@ const CustomTooltip = ({ active, payload }: TooltipProps<number, string>) => {
     const { name, points, team } = data;
 
     return (
-      <div className="custom-tooltip bg-white p-2 shadow-md rounded text-gray-600">
+      <div className="custom-tooltip bg-white p-2 shadow-md rounded">
         <p className="label font-bold">{`${name}`}</p>
         {team && <p className="intro">{`${team}`}</p>}
         <p className="desc">{`Points: ${points}`}</p>
@@ -66,16 +66,10 @@ export default function Standings() {
     <div className="p-4">
       <h2 className="text-2xl font-bold mb-4 text-[#e10600]">Standings</h2>
       <div className="flex justify-center space-x-4 mb-4">
-        <button
-          className={`px-4 py-2 rounded-md ${showDrivers ? "bg-[#e10600] text-white" : "bg-gray-200 text-gray-700"}`}
-          onClick={() => setShowDrivers(true)}
-        >
+        <button className={`px-4 py-2 rounded-md ${showDrivers ? "bg-[#e10600] text-white" : "bg-gray-200"}`} onClick={() => setShowDrivers(true)}>
           Driver Standings
         </button>
-        <button
-          className={`px-4 py-2 rounded-md ${!showDrivers ? "bg-[#e10600] text-white" : "bg-gray-200 text-gray-700"}`}
-          onClick={() => setShowDrivers(false)}
-        >
+        <button className={`px-4 py-2 rounded-md ${!showDrivers ? "bg-[#e10600] text-white" : "bg-gray-200"}`} onClick={() => setShowDrivers(false)}>
           Team Standings
         </button>
       </div>
@@ -90,16 +84,16 @@ export default function Standings() {
           <div className="overflow-x-auto mb-8">
             <table className="min-w-full bg-white">
               <thead>
-                <tr className="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
+                <tr className="bg-gray-200 uppercase text-sm leading-normal">
                   <th className="py-3 px-6 text-left">Position</th>
                   <th className="py-3 px-6 text-left">{showDrivers ? "Driver" : "Team"}</th>
                   {showDrivers && <th className="py-3 px-6 text-left">Team</th>}
                   <th className="py-3 px-6 text-left">Points</th>
                 </tr>
               </thead>
-              <tbody className="text-gray-600 text-sm font-light">
+              <tbody className="text-sm font-light">
                 {(showDrivers ? drivers : teams).map((item, index) => (
-                  <tr key={item.id} className="border-b border-gray-200 hover:bg-gray-100">
+                  <tr key={item.id} className={`border-b border-gray-200 hover:bg-gray-100 ${index % 2 && "bg-gray-50"}`}>
                     <td className="py-3 px-6 text-left whitespace-nowrap">{index + 1}</td>
                     <td className="py-3 px-6 text-left">{item.name}</td>
                     {showDrivers && <td className="py-3 px-6 text-left">{(item as Driver).team}</td>}
