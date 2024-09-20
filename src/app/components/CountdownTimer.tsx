@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useRacesStore } from "../stores/racesStore";
+import type { Race } from "../lib/types";
 
 function timeLeftForRace(raceDate: Date) {
   const now = new Date();
@@ -15,20 +15,8 @@ function timeLeftForRace(raceDate: Date) {
   };
 }
 
-export default function CountdownTimer() {
-  const { nextRace, fetchNextRace } = useRacesStore();
-  const [timeLeft, setTimeLeft] = useState({
-    days: 0,
-    hours: 0,
-    mins: 0,
-    secs: 0,
-  });
-
-  useEffect(() => {
-    if (!nextRace) {
-      fetchNextRace();
-    }
-  }, [nextRace, fetchNextRace]);
+export default function CountdownTimer({ nextRace }: { nextRace: Race | null }) {
+  const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, mins: 0, secs: 0 });
 
   useEffect(() => {
     if (nextRace) {
