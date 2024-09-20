@@ -18,6 +18,7 @@ const baseUrl = "https://ergast.com/api/f1/";
 export const endpoint = {
   //sessions: (year: number) => baseUrl + `sessions?year=${year}`,
   "next-race": baseUrl + "current/next.json",
+  "all-races": (year: string) => baseUrl + `${year}.json`,
 };
 
 export const f1Api = {
@@ -29,9 +30,24 @@ export const f1Api = {
       }
       const data = await response.json();
       return data.MRData.RaceTable.Races[0];
-    } catch (err) {
-      console.error("Error fetching the next race:", err);
+    } catch (error) {
+      console.error("Error fetching the next race:", error);
       return null;
+    }
+  },
+
+  async getAllRaces(year: string): Promise<Race[] | []> {
+    try {
+      const response = await fetch(endpoint["all-races"](year));
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      return data.MRData.RaceTable.Races;
+    } catch (error) {
+      console.error("Error fetching the next race:", error);
+      return [];
     }
   },
 };
