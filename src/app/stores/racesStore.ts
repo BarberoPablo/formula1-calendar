@@ -7,7 +7,7 @@ interface State {
 }
 
 interface Actions {
-  /* setNextRace: (race: Race) => void; */
+  setNextRace: (race: Race) => void;
   fetchNextRace: () => Promise<void>;
 }
 
@@ -16,7 +16,7 @@ export const useRacesStore = create<State & Actions>()((set) => ({
   nextRace: null,
 
   /* Actions */
-  /* setNextRace: (race: Race) => set({ nextRace: race }), */
+  setNextRace: (race: Race) => set({ nextRace: race }),
 
   fetchNextRace: async () => {
     try {
