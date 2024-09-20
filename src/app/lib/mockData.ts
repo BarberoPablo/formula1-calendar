@@ -1,8 +1,8 @@
 //ALL THIS INFO IS FROM 2023, I REPLACED THE STRING 2023 WITH 2024
 
-import { Driver, Race, Team } from "./types";
+import { Driver, OldRace, Team } from "./types";
 
-export const races: Race[] = [
+export const races: OldRace[] = [
   { id: 1, name: "Bahrain Grand Prix", date: "2024-03-05", circuit: "Bahrain International Circuit" },
   { id: 2, name: "Saudi Arabian Grand Prix", date: "2024-03-19", circuit: "Jeddah Corniche Circuit" },
   { id: 3, name: "Australian Grand Prix", date: "2024-04-02", circuit: "Albert Park Circuit" },

@@ -4,13 +4,13 @@ import { AnimatePresence, motion } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useState } from "react";
 import { races } from "../lib/mockData";
-import { Race } from "../lib/types";
+import { OldRace } from "../lib/types";
 
 const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
 export default function Calendar() {
   const [currentDate, setCurrentDate] = useState(new Date());
-  const [selectedRace, setSelectedRace] = useState<Race | null>(null);
+  const [selectedRace, setSelectedRace] = useState<OldRace | null>(null);
 
   const getDaysInMonth = (year: number, month: number) => new Date(year, month + 1, 0).getDate();
   const getFirstDayOfMonth = (year: number, month: number) => new Date(year, month, 1).getDay();
@@ -23,7 +23,7 @@ export default function Calendar() {
     setCurrentDate((prev) => new Date(prev.getFullYear(), prev.getMonth() + 1, 1));
   };
 
-  const handleRaceClick = (race: Race) => {
+  const handleRaceClick = (race: OldRace) => {
     setSelectedRace(race);
   };
 
@@ -43,20 +43,17 @@ export default function Calendar() {
       const race = races.find((r) => new Date(r.date).toDateString() === date.toDateString());
 
       days.push(
-        <div className="flex justify-center items-center h-10">
+        <div key={day} className="flex justify-center items-center h-10">
           {race ? (
             <a
               href="#race-info"
-              key={day}
               className={"h-10 w-10 flex items-center justify-center rounded-full bg-[#e10600] text-white"}
               onClick={() => race && handleRaceClick(race)}
             >
               {day}
             </a>
           ) : (
-            <div key={day} className={"h-10 w-10 flex items-center justify-center rounded-full"}>
-              {day}
-            </div>
+            <div className={"h-10 w-10 flex items-center justify-center rounded-full"}>{day}</div>
           )}
         </div>
       );
