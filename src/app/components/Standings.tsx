@@ -63,7 +63,7 @@ function RenderCustomBarChart({ data }: { data: Driver[] | Team[] }) {
 export default function Standings() {
   const [showDrivers, setShowDrivers] = useState(true);
   return (
-    <div className="p-4">
+    <div id="standings" className="p-4">
       <h2 className="text-2xl font-bold mb-4 text-[#e10600]">Standings</h2>
       <div className="flex justify-center space-x-4 mb-4">
         <button className={`px-4 py-2 rounded-md ${showDrivers ? "bg-[#e10600] text-white" : "bg-gray-200"}`} onClick={() => setShowDrivers(true)}>
