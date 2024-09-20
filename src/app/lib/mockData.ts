@@ -1,32 +1,6 @@
 //ALL THIS INFO IS FROM 2023, I REPLACED THE STRING 2023 WITH 2024
 
-import { Driver, OldRace, Team } from "./types";
-
-export const races: OldRace[] = [
-  { id: 1, name: "Bahrain Grand Prix", date: "2024-03-05", circuit: "Bahrain International Circuit" },
-  { id: 2, name: "Saudi Arabian Grand Prix", date: "2024-03-19", circuit: "Jeddah Corniche Circuit" },
-  { id: 3, name: "Australian Grand Prix", date: "2024-04-02", circuit: "Albert Park Circuit" },
-  { id: 4, name: "Azerbaijan Grand Prix", date: "2024-04-30", circuit: "Baku City Circuit" },
-  { id: 5, name: "Miami Grand Prix", date: "2024-05-07", circuit: "Miami International Autodrome" },
-  { id: 6, name: "Emilia Romagna Grand Prix", date: "2024-05-21", circuit: "Imola", status: "Canceled" },
-  { id: 7, name: "Monaco Grand Prix", date: "2024-05-28", circuit: "Circuit de Monaco" },
-  { id: 8, name: "Spanish Grand Prix", date: "2024-06-04", circuit: "Circuit de Barcelona-Catalunya" },
-  { id: 9, name: "Canadian Grand Prix", date: "2024-06-18", circuit: "Circuit Gilles Villeneuve" },
-  { id: 10, name: "Austrian Grand Prix", date: "2024-07-02", circuit: "Red Bull Ring" },
-  { id: 11, name: "British Grand Prix", date: "2024-07-09", circuit: "Silverstone Circuit" },
-  { id: 12, name: "Hungarian Grand Prix", date: "2024-07-23", circuit: "Hungaroring" },
-  { id: 13, name: "Belgian Grand Prix", date: "2024-07-30", circuit: "Circuit de Spa-Francorchamps" },
-  { id: 14, name: "Dutch Grand Prix", date: "2024-08-27", circuit: "Circuit Zandvoort" },
-  { id: 15, name: "Italian Grand Prix", date: "2024-09-03", circuit: "Monza" },
-  { id: 16, name: "Singapore Grand Prix", date: "2024-09-17", circuit: "Marina Bay Street Circuit" },
-  { id: 17, name: "Japanese Grand Prix", date: "2024-09-24", circuit: "Suzuka International Racing Course" },
-  { id: 18, name: "Qatar Grand Prix", date: "2024-10-08", circuit: "Losail International Circuit" },
-  { id: 19, name: "United States Grand Prix", date: "2024-10-22", circuit: "Circuit of the Americas" },
-  { id: 20, name: "Mexico City Grand Prix", date: "2024-10-29", circuit: "Autodromo Hermanos Rodriguez" },
-  { id: 21, name: "São Paulo Grand Prix", date: "2024-11-05", circuit: "Interlagos Circuit" },
-  { id: 22, name: "Las Vegas Grand Prix", date: "2024-11-18", circuit: "Las Vegas Street Circuit" },
-  { id: 23, name: "Abu Dhabi Grand Prix", date: "2024-11-26", circuit: "Yas Marina Circuit" },
-];
+import { Driver, Team } from "./types";
 
 export const drivers: Driver[] = [
   { id: 1, name: "Max Verstappen", team: "Red Bull Racing", points: 454, "short-name": "VER" },

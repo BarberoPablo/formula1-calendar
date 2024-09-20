@@ -6,7 +6,7 @@ import Standings from "./components/Standings";
 //import UpdateRaceStore from "./components/UpdateRacesStore"; // Componente cliente para actualizar el store
 
 export default async function Home() {
-  const nextRace = await f1Api.getNextRace(); // Fetch de datos en el Server Component
+  const [nextRace, races] = await Promise.all([f1Api.getNextRace(), f1Api.getAllRaces("2024")]);
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-center p-4 md:p-24 bg-gray-100">
@@ -17,7 +17,7 @@ export default async function Home() {
         {/* <UpdateRaceStore nextRace={nextRace} /> */}
         {/* I will use props instead of zustand for nextRace so CountdownTimer has instant access to it */}
         <CountdownTimer nextRace={nextRace} />
-        <Calendar />
+        <Calendar races={races} />
         <Standings />
         <F1Curiosities />
       </div>

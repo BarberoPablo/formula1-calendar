@@ -15,6 +15,18 @@ export const teamColors: { [key in TeamName]: string[] } = {
   Williams: ["#005AFF"],
 };
 
+export function createDate(date: string, time: string) {
+  return new Date(`${date}T${time}`);
+}
+
+export function getDaysInMonth(year: number, month: number) {
+  return new Date(year, month + 1, 0).getDate();
+}
+
+export function getFirstDayOfMonth(year: number, month: number) {
+  return new Date(year, month, 1).getDay();
+}
+
 export const curiosities = [
   {
     id: 1,

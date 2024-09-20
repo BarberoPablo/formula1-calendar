@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import type { Race } from "../lib/types";
+import { createDate } from "../lib/utils";
 
 function timeLeftForRace(raceDate: Date) {
   const now = new Date();
@@ -20,7 +21,7 @@ export default function CountdownTimer({ nextRace }: { nextRace: Race | null }) 
 
   useEffect(() => {
     if (nextRace) {
-      const raceDate = new Date(`${nextRace.date}T${nextRace.time}`);
+      const raceDate = createDate(nextRace.date, nextRace.time);
       const tick = () => {
         const timeLeft = timeLeftForRace(raceDate);
         setTimeLeft(timeLeft);

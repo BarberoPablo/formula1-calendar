@@ -1,11 +1,3 @@
-export type OldRace = {
-  id: number;
-  name: string;
-  date: string;
-  circuit: string;
-  status?: string; // Esto es opcional, ya que algunas carreras pueden estar canceladas o tener un estado especial
-};
-
 export type Driver = {
   id: number;
   name: string;
@@ -75,11 +67,15 @@ export type Race = {
     date: string;
     time: string;
   };
-  ThirdPractice: {
+  ThirdPractice?: {
     date: string;
     time: string;
   };
-  Qualifying: {
+  Qualifying?: {
+    date: string;
+    time: string;
+  };
+  Sprint?: {
     date: string;
     time: string;
   };
