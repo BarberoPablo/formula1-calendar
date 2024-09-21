@@ -3,7 +3,7 @@ import Banner from "./components/Banner";
 import CalendarAndCircuit from "./components/calendar-and-circuit/index";
 import CountdownTimer from "./components/CountdownTimer";
 import F1Curiosities from "./components/F1Curiosities";
-import Standings from "./components/Standings";
+import StandingsTable from "./components/standings/StandingsTable";
 //import UpdateRaceStore from "./components/UpdateRacesStore"; // Componente cliente para actualizar el store
 
 export default async function Home() {
@@ -21,7 +21,7 @@ export default async function Home() {
           </div>
         )}
         <CalendarAndCircuit races={races} />
-        <Standings />
+        <StandingsTable />
         <F1Curiosities />
       </div>
     </main>
