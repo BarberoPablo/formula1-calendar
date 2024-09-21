@@ -4,6 +4,7 @@ import Image from "next/image";
 import React from "react";
 
 export default function CircuitView({ selectedRace }: { selectedRace: Race | null }) {
+  console.log({ selectedRace });
   return (
     <AnimatePresence>
       {selectedRace && (
@@ -12,7 +13,7 @@ export default function CircuitView({ selectedRace }: { selectedRace: Race | nul
           key={selectedRace.raceName}
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
-          className="relative flex flex-col lg:flex-row mt-14 py-6 space-y-4 rounded-tr-3xl lg:shadow-lg border-t-[10px] border-r-[10px] border-[#e10600]"
+          className="relative flex flex-col justify-between lg:flex-row mt-14 py-10 lg:py-6 space-y-4 rounded-tr-3xl lg:shadow-lg border-t-[10px] border-r-[10px] border-[#e10600] bg-cover bg-center"
         >
           <div className="absolute flex flex-col lg:flex-row lg:bg-gray-100 -top-5 left-0">
             <div className="bg-gray-100 w-28 lg:w-14 pl-4 lg:pl-0">
@@ -24,10 +25,10 @@ export default function CircuitView({ selectedRace }: { selectedRace: Race | nul
                 alt="Singapore flag"
               />
             </div>
-            <h2 className="lg:mx-5 text-xl text-black font-bold">{selectedRace.Circuit.circuitName}</h2>
+            <h2 className="lg:mx-5 text-2xl text-black font-bold">{selectedRace.Circuit.circuitName}</h2>
           </div>
 
-          <div className="max-w-[732px] max-h-[412px]">
+          <div>
             <Image
               layout="responsive"
               src="https://media.formula1.com/image/upload/f_auto,c_limit,q_auto,w_1320/content/dam/fom-website/2018-redesign-assets/Circuit%20maps%2016x9/Singapore_Circuit"
@@ -37,10 +38,12 @@ export default function CircuitView({ selectedRace }: { selectedRace: Race | nul
             />
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 w-full lg:max-w-sm h-fit gap-x-2 gap-y-5 pr-5">
-            <DisplayInformation title="Number of Laps" bigContent="62" />
-            <DisplayInformation title="Circuit Length" bigContent="4.94" smallContent="km" />
-            <DisplayInformation title="Circuit Length" bigContent="4.94" smallContent="km" />
+          <div className="flex w-full lg:max-w-[500px]">
+            <div className="grid grid-cols-1 sm:grid-cols-2 w-full h-fit gap-x-2 gap-y-5 pr-5">
+              <DisplayInformation title="Number of Laps" bigContent="62" />
+              <DisplayInformation title="Circuit Length" bigContent="4.94" smallContent="km" />
+              <DisplayInformation title="Circuit Length" bigContent="4.94" smallContent="km" />
+            </div>
           </div>
         </motion.div>
       )}
@@ -50,12 +53,12 @@ export default function CircuitView({ selectedRace }: { selectedRace: Race | nul
 
 function DisplayInformation({ title, bigContent, smallContent }: { title: string; bigContent: string; smallContent?: string }) {
   return (
-    <div className="flex flex-col w-full h-fit pb-5 pr-5 text-gray-900 rounded-br-2xl border-b-2 border-r-2 border-gray-300">
+    <div className="flex flex-col w-full h-fit pb-5 pr-5 text-black rounded-br-2xl border-b-2 border-r-2 border-gray-300">
       <div>
         <span className="text-base">{title}</span>
       </div>
       <div>
-        <h2 className="text-3xl font-bold">
+        <h2 className="text-4xl font-black">
           {bigContent} <span className="text-base font-normal">{smallContent}</span>
         </h2>
       </div>

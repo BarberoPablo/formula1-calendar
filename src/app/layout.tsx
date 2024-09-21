@@ -1,8 +1,8 @@
-import { Inter } from "next/font/google";
+import { Titillium_Web } from "next/font/google";
 import Navbar from "./components/Navbar";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Titillium_Web({ weight: "400", subsets: ["latin"] });
 
 export const metadata = {
   title: "F1 Dashboard",
