@@ -1,4 +1,5 @@
 import { Race } from "@/app/lib/types";
+import { createDate } from "@/app/lib/utils";
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import React from "react";
@@ -38,12 +39,14 @@ export default function CircuitView({ selectedRace }: { selectedRace: Race | nul
             />
           </div>
 
-          <div className="flex w-full lg:max-w-[500px]">
-            <div className="grid grid-cols-1 sm:grid-cols-2 w-full h-fit gap-x-2 gap-y-5 pr-5">
-              <DisplayInformation title="Number of Laps" bigContent="62" />
-              <DisplayInformation title="Circuit Length" bigContent="4.94" smallContent="km" />
-              <DisplayInformation title="Circuit Length" bigContent="4.94" smallContent="km" />
+          <div className="flex flex-col w-full lg:max-w-[500px]">
+            <div className="grid grid-cols-1 sm:grid-cols-2 w-full h-fit gap-x-2 gap-y-5 pr-5 mb-4">
+              <FramedInfo title="Number of Laps" bigContent="62" />
+              <FramedInfo title="Circuit Length" bigContent="4.94" smallContent="km" />
+              <FramedInfo title="Circuit Length" bigContent="4.94" smallContent="km" />
+              <FramedInfo title="Circuit Length" bigContent="4.94" smallContent="km" />
             </div>
+            <SessionDates race={selectedRace} />
           </div>
         </motion.div>
       )}
@@ -51,7 +54,7 @@ export default function CircuitView({ selectedRace }: { selectedRace: Race | nul
   );
 }
 
-function DisplayInformation({ title, bigContent, smallContent }: { title: string; bigContent: string; smallContent?: string }) {
+function FramedInfo({ title, bigContent, smallContent }: { title: string; bigContent: string; smallContent?: string }) {
   return (
     <div className="flex flex-col w-full h-fit pb-5 pr-5 text-black rounded-br-2xl border-b-2 border-r-2 border-gray-300">
       <div>
@@ -62,6 +65,31 @@ function DisplayInformation({ title, bigContent, smallContent }: { title: string
           {bigContent} <span className="text-base font-normal">{smallContent}</span>
         </h2>
       </div>
+    </div>
+  );
+}
+
+function SessionDates({ race }: { race: Race }) {
+  const sessions = [
+    { date: createDate(race.date, race.time), event: "Race Day" },
+    { date: createDate(race.Qualifying?.date, race.Qualifying?.time), event: "Qualifying Day" },
+    { date: createDate(race.Sprint?.date, race.Sprint?.time), event: "Sprint Day" },
+    { date: createDate(race.ThirdPractice?.date, race.ThirdPractice?.time), event: "Third Practice" },
+    { date: createDate(race.SecondPractice.date, race.SecondPractice.time), event: "Second Practice" },
+    { date: createDate(race.FirstPractice.date, race.FirstPractice.time), event: "First Practice" },
+  ];
+  return (
+    <div className="flex flex-col w-full h-fit space-y-4">
+      {sessions.map(
+        (session) =>
+          session.date && (
+            <div key={session.event} className="flex flex-col pb-1 text-black rounded-br-2xl border-b-2  border-gray-300">
+              <h2 className="text-xl font-black">
+                {session.event}: <span className="text-base font-normal">{session.date.toLocaleString()}</span>
+              </h2>
+            </div>
+          )
+      )}
     </div>
   );
 }

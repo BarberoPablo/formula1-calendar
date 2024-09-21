@@ -2,11 +2,11 @@
 
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
-import { Bar, BarChart, Cell, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import type { TooltipProps } from "recharts";
+import { Bar, BarChart, Cell, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
+import { teamColors } from "../lib/constants";
 import { drivers, teams } from "../lib/mockData";
 import { Driver, Team } from "../lib/types";
-import { teamColors } from "../lib/utils";
 
 interface CustomPayload {
   name: string;

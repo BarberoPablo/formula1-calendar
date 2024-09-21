@@ -80,3 +80,29 @@ export type Race = {
     time: string;
   };
 };
+
+export type CircuitId =
+  | "albert_park"
+  | "americas"
+  | "bahrain"
+  | "baku"
+  | "catalunya"
+  | "hungaroring"
+  | "imola"
+  | "interlagos"
+  | "jeddah"
+  | "losail"
+  | "marina_bay"
+  | "miami"
+  | "monaco"
+  | "monza"
+  | "red_bull_ring"
+  | "rodriguez"
+  | "shanghai"
+  | "silverstone"
+  | "spa"
+  | "suzuka"
+  | "vegas"
+  | "villeneuve"
+  | "yas_marina"
+  | "zandvoort";

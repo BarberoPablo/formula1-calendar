@@ -1,8 +1,8 @@
 "use client";
 
+import type { Race } from "@/app/lib/types";
 import { useState } from "react";
 import CalendarView from "./CalendarView";
-import type { Race } from "@/app/lib/types";
 import CircuitView from "./CircuitView";
 
 export default function CalendarAndCircuit({ races }: { races: Race[] }) {
@@ -20,7 +20,6 @@ export default function CalendarAndCircuit({ races }: { races: Race[] }) {
   return (
     <div className="p-4" id="calendar">
       <CalendarView races={races} onRaceClick={handleRaceClick} />
-
       <CircuitView selectedRace={selectedRace} />
     </div>
   );
