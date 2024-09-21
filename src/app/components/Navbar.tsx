@@ -36,8 +36,8 @@ export default function Navbar() {
             <Image
               className="md:block h-8 w-auto hidden"
               src="https://media.formula1.com/image/upload/f_auto,c_limit,w_195,q_auto/etc/designs/fom-website/images/f1_logo"
-              width={300}
-              height={300}
+              width={128}
+              height={32}
               alt="Formula1 Logo"
             />
             <div className="ml-10 flex items-baseline space-x-4">

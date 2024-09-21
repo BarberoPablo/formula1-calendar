@@ -15,7 +15,7 @@ export const teamColors: { [key in TeamName]: string[] } = {
 
 export const yearImage = "https://media.formula1.com/content/dam/fom-website/2018-redesign-assets/year%20icon/2024.png";
 
-export const circuitImages: { [key in CircuitId]: string } = {
+export const circuitsImages: { [key in CircuitId]: string } = {
   albert_park:
     "https://media.formula1.com/image/upload/f_auto,c_limit,w_1440,q_auto/f_auto/q_auto/content/dam/fom-website/2018-redesign-assets/Racehub%20header%20images%2016x9/Australia",
   americas:

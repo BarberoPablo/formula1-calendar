@@ -47,7 +47,7 @@ export type Race = {
   url: string;
   raceName: string;
   Circuit: {
-    circuitId: string;
+    circuitId: CircuitId;
     url: string;
     circuitName: string;
     Location: {
