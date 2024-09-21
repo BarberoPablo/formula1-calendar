@@ -1,16 +1,17 @@
-"use client";
-
-import { AnimatePresence, motion } from "framer-motion";
+import React, { useState } from "react";
+import type { Race } from "../../lib/types";
+import { createDate, getDaysInMonth, getFirstDayOfMonth } from "../../lib/utils";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { useState } from "react";
-import type { Race } from "../lib/types";
-import { createDate, getDaysInMonth, getFirstDayOfMonth } from "../lib/utils";
+
+interface CalendarViewProps {
+  races: Race[];
+  onRaceClick: (race: Race, day: number) => void;
+}
 
 const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
-export default function Calendar({ races }: { races: Race[] }) {
+const CalendarView: React.FC<CalendarViewProps> = ({ races, onRaceClick }) => {
   const [currentDate, setCurrentDate] = useState(new Date());
-  const [selectedRace, setSelectedRace] = useState<Race | null>(null);
 
   const handlePrevMonth = () => {
     setCurrentDate((prev) => new Date(prev.getFullYear(), prev.getMonth() - 1, 1));
@@ -18,15 +19,6 @@ export default function Calendar({ races }: { races: Race[] }) {
 
   const handleNextMonth = () => {
     setCurrentDate((prev) => new Date(prev.getFullYear(), prev.getMonth() + 1, 1));
-  };
-
-  const handleRaceClick = (race: Race, day: number) => {
-    /* If day is different from race.day => its a qualy || practice || sprint 
-      show all data from that day, all that matches, if 2 practices matches, array and set a state with array of things to show
-    */
-    setSelectedRace(race);
-    console.log({ race });
-    console.log({ day });
   };
 
   const renderCalendar = () => {
@@ -57,7 +49,7 @@ export default function Calendar({ races }: { races: Race[] }) {
             <a
               href="#race-info"
               className={"h-10 w-10 flex items-center justify-center rounded-full bg-[#e10600] text-white"}
-              onClick={() => race && handleRaceClick(race, day)}
+              onClick={() => race && onRaceClick(race, day)}
             >
               {day}
             </a>
@@ -72,7 +64,7 @@ export default function Calendar({ races }: { races: Race[] }) {
   };
 
   return (
-    <div className="p-4">
+    <div className="p-4" id="calendar">
       <h2 className="text-2xl font-bold mb-4 text-[#e10600]">2024 F1 Calendar</h2>
       <div className="bg-white p-4 rounded-lg shadow-md">
         <div className="flex justify-between items-center mb-4">
@@ -95,22 +87,8 @@ export default function Calendar({ races }: { races: Race[] }) {
         </div>
         <div className="grid grid-cols-7 gap-2">{renderCalendar()}</div>
       </div>
-      <AnimatePresence>
-        {selectedRace && (
-          <motion.div
-            id="race-info"
-            key={selectedRace.raceName}
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="mt-8 p-6 space-y-2 bg-white rounded-lg shadow-lg"
-          >
-            <h3 className="text-xl font-bold">{selectedRace.raceName}</h3>
-            <p>Date: {createDate(selectedRace.date, selectedRace.time).toLocaleDateString()}</p>
-            <p>Time: {createDate(selectedRace.date, selectedRace.time).toLocaleTimeString()}</p>
-            <p>Circuit: {selectedRace.Circuit.circuitName}</p>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </div>
   );
-}
+};
+
+export default CalendarView;

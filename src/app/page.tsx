@@ -1,5 +1,5 @@
 import { f1Api } from "./api/f1Api";
-import Calendar from "./components/Calendar";
+import CalendarAndCircuit from "./components/calendar-and-circuit/index";
 import CountdownTimer from "./components/CountdownTimer";
 import F1Curiosities from "./components/F1Curiosities";
 import Standings from "./components/Standings";
@@ -16,8 +16,8 @@ export default async function Home() {
       <div className="w-full max-w-7xl space-y-8 text-gray-700">
         {/* <UpdateRaceStore nextRace={nextRace} /> */}
         {/* I will use props instead of zustand for nextRace so CountdownTimer has instant access to it */}
+        <CalendarAndCircuit races={races} />
         <CountdownTimer nextRace={nextRace} />
-        <Calendar races={races} />
         <Standings />
         <F1Curiosities />
       </div>
