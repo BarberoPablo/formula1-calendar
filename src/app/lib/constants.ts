@@ -63,3 +63,10 @@ export const circuitsImages: { [key in CircuitId]: string } = {
   zandvoort:
     "https://media.formula1.com/image/upload/f_auto,c_limit,w_1440,q_auto/f_auto/q_auto/content/dam/fom-website/2018-redesign-assets/Racehub%20header%20images%2016x9/Netherlands",
 };
+
+export const watch = {
+  base: "https://www.formula1.com/assets/racing/_next/static/media/face.d0a95198.svg",
+  seconds: "https://www.formula1.com/assets/racing/_next/static/media/seconds.ee938cd7.svg",
+  minutes: "https://www.formula1.com/assets/racing/_next/static/media/minutes.15643f3a.svg",
+  hours: "https://www.formula1.com/assets/racing/_next/static/media/hours.fed8770d.svg",
+};
