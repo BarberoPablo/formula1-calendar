@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { watch } from "../lib/constants";
 import type { Race } from "../lib/types";
-import { createDate } from "../lib/utils";
+import { getNextSession } from "../lib/utils";
 
 function timeLeftForRace(raceDate: Date) {
   const now = new Date();
@@ -18,34 +18,31 @@ function timeLeftForRace(raceDate: Date) {
   };
 }
 
-export default function CountdownTimer({ nextRace }: { nextRace: Race | null }) {
+export default function CountdownTimer({ nextRace }: { nextRace: Race }) {
   const [timeLeft, setTimeLeft] = useState({ hrs: 0, mins: 0, secs: 0 });
   const [currentTime, setCurrentTime] = useState({ hrs: 0, mins: 0, secs: 0 });
+  const nextSession = getNextSession(nextRace);
 
   useEffect(() => {
-    if (nextRace) {
-      const raceDate = createDate(nextRace.date, nextRace.time);
+    if (nextSession) {
+      const tick = () => {
+        const timeLeft = timeLeftForRace(nextSession.date);
+        setTimeLeft(timeLeft);
 
-      if (raceDate) {
-        const tick = () => {
-          const timeLeft = timeLeftForRace(raceDate);
-          setTimeLeft(timeLeft);
+        const now = new Date();
+        setCurrentTime({
+          hrs: now.getHours() % 12,
+          mins: now.getMinutes(),
+          secs: now.getSeconds(),
+        });
+      };
 
-          const now = new Date();
-          setCurrentTime({
-            hrs: now.getHours() % 12,
-            mins: now.getMinutes(),
-            secs: now.getSeconds(),
-          });
-        };
+      tick();
+      const timer = setInterval(tick, 1000);
 
-        tick();
-        const timer = setInterval(tick, 1000);
-
-        return () => clearInterval(timer);
-      }
+      return () => clearInterval(timer);
     }
-  }, [nextRace]);
+  }, [nextSession]);
 
   return (
     <motion.div
@@ -54,7 +51,7 @@ export default function CountdownTimer({ nextRace }: { nextRace: Race | null }) 
       className="flex items-center justify-center p-4 space-x-4 w-[300px] h-[120px] px-4 py-3 rounded-lg font-black bg-[#006341] text-white"
     >
       <div className="flex flex-col items-center">
-        <h2 className="text-sm mb-4 w-full text-center border-b-[1px] border-gray-400">{"Qualifying".toUpperCase()}</h2>
+        <h2 className="text-sm mb-4 w-full text-center border-b-[1px] border-gray-400">{nextSession?.event.toUpperCase()}</h2>
         <div className="flex">
           {Object.entries(timeLeft).map(([unit, value]) => (
             <div key={unit} className="flex flex-col items-center border-r-[1px] border-gray-400 px-2">

@@ -16,7 +16,7 @@ export default async function Home() {
         {/* <UpdateRaceStore nextRace={nextRace} /> */}
 
         {nextRace && (
-          <div className="block w-fit m-auto lg:fixed lg:top-20 lg:right-4 ">
+          <div className="block w-fit z-50 m-auto lg:fixed lg:top-20 lg:right-4 ">
             <CountdownTimer nextRace={nextRace} />
           </div>
         )}

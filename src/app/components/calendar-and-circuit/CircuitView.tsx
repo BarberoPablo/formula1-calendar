@@ -1,11 +1,9 @@
 import { Race } from "@/app/lib/types";
-import { createDate } from "@/app/lib/utils";
+import { getSessions } from "@/app/lib/utils";
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
-import React from "react";
 
 export default function CircuitView({ selectedRace }: { selectedRace: Race | null }) {
-  console.log({ selectedRace });
   return (
     <AnimatePresence>
       {selectedRace && (
@@ -70,14 +68,8 @@ function FramedInfo({ title, bigContent, smallContent }: { title: string; bigCon
 }
 
 function SessionDates({ race }: { race: Race }) {
-  const sessions = [
-    { date: createDate(race.date, race.time), event: "Race Day" },
-    { date: createDate(race.Qualifying?.date, race.Qualifying?.time), event: "Qualifying Day" },
-    { date: createDate(race.Sprint?.date, race.Sprint?.time), event: "Sprint Day" },
-    { date: createDate(race.ThirdPractice?.date, race.ThirdPractice?.time), event: "Third Practice" },
-    { date: createDate(race.SecondPractice.date, race.SecondPractice.time), event: "Second Practice" },
-    { date: createDate(race.FirstPractice.date, race.FirstPractice.time), event: "First Practice" },
-  ];
+  const sessions = getSessions(race);
+
   return (
     <div className="flex flex-col w-full h-fit space-y-4">
       {sessions.map(
