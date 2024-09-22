@@ -29,7 +29,6 @@ export default function CircuitView({ selectedRace }: { selectedRace: Race | nul
 
           <div>
             <Image
-              layout="responsive"
               src="https://media.formula1.com/image/upload/f_auto,c_limit,q_auto,w_1320/content/dam/fom-website/2018-redesign-assets/Circuit%20maps%2016x9/Singapore_Circuit"
               alt="Singapore Circuit"
               width={732}
