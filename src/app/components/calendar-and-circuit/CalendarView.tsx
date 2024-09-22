@@ -1,19 +1,17 @@
-"use client";
-
-import { AnimatePresence, motion } from "framer-motion";
+import React, { useState } from "react";
+import type { Race } from "../../lib/types";
+import { getDaysInMonth, getFirstDayOfMonth, getSessions } from "../../lib/utils";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { useState } from "react";
-import { races } from "../lib/mockData";
-import { Race } from "../lib/types";
+
+interface CalendarViewProps {
+  races: Race[];
+  onRaceClick: (race: Race, day: number) => void;
+}
 
 const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
-export default function Calendar() {
+const CalendarView: React.FC<CalendarViewProps> = ({ races, onRaceClick }) => {
   const [currentDate, setCurrentDate] = useState(new Date());
-  const [selectedRace, setSelectedRace] = useState<Race | null>(null);
-
-  const getDaysInMonth = (year: number, month: number) => new Date(year, month + 1, 0).getDate();
-  const getFirstDayOfMonth = (year: number, month: number) => new Date(year, month, 1).getDay();
 
   const handlePrevMonth = () => {
     setCurrentDate((prev) => new Date(prev.getFullYear(), prev.getMonth() - 1, 1));
@@ -21,10 +19,6 @@ export default function Calendar() {
 
   const handleNextMonth = () => {
     setCurrentDate((prev) => new Date(prev.getFullYear(), prev.getMonth() + 1, 1));
-  };
-
-  const handleRaceClick = (race: Race) => {
-    setSelectedRace(race);
   };
 
   const renderCalendar = () => {
@@ -40,23 +34,20 @@ export default function Calendar() {
 
     for (let day = 1; day <= daysInMonth; day++) {
       const date = new Date(year, month, day);
-      const race = races.find((r) => new Date(r.date).toDateString() === date.toDateString());
+      const race = races.find((race) => getSessions(race).find((session) => session.date?.toDateString() === date.toDateString()));
 
       days.push(
-        <div className="flex justify-center items-center h-10">
+        <div key={day} className="flex justify-center items-center h-10">
           {race ? (
             <a
               href="#race-info"
-              key={day}
-              className={"h-10 w-10 flex items-center justify-center rounded-full bg-[#e10600] text-white"}
-              onClick={() => race && handleRaceClick(race)}
+              className={"h-[29px] w-[29px] flex items-center justify-center rounded-full bg-[#e10600] text-white"}
+              onClick={() => race && onRaceClick(race, day)}
             >
               {day}
             </a>
           ) : (
-            <div key={day} className={"h-10 w-10 flex items-center justify-center rounded-full"}>
-              {day}
-            </div>
+            <div className={"h-10 w-10 flex items-center justify-center rounded-full"}>{day}</div>
           )}
         </div>
       );
@@ -66,9 +57,9 @@ export default function Calendar() {
   };
 
   return (
-    <div className="p-4">
+    <div id="calendar" className="lg:p-4">
       <h2 className="text-2xl font-bold mb-4 text-[#e10600]">2024 F1 Calendar</h2>
-      <div className="bg-white p-4 rounded-lg shadow-md">
+      <div className="m-auto w-72 lg:w-80 bg-white p-4 rounded-lg shadow-md">
         <div className="flex justify-between items-center mb-4">
           <button onClick={handlePrevMonth} className="p-2 rounded-full hover:bg-gray-200">
             <ChevronLeft className="text-[#e10600]" />
@@ -89,21 +80,8 @@ export default function Calendar() {
         </div>
         <div className="grid grid-cols-7 gap-2">{renderCalendar()}</div>
       </div>
-      <AnimatePresence>
-        {selectedRace && (
-          <motion.div
-            id="race-info"
-            key={selectedRace.id}
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="mt-8 bg-white p-6 rounded-lg shadow-lg"
-          >
-            <h3 className="text-xl font-bold mb-2">{selectedRace.name}</h3>
-            <p className="mb-2">Date: {new Date(selectedRace.date).toLocaleDateString()}</p>
-            <p>Circuit: {selectedRace.circuit}</p>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </div>
   );
-}
+};
+
+export default CalendarView;

@@ -1,39 +1,29 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { AlignJustify, X } from "lucide-react";
-//import Image from "next/image";
-import Link from "next/link";
+import { AlignJustify, BriefcaseBusiness, Github, Linkedin, X } from "lucide-react";
+import Image from "next/image";
 import { useState } from "react";
 
 const navItems = [
-  { name: "Calendar", href: "/calendar" },
-  { name: "Standings", href: "/standings" },
-  { name: "Teams", href: "/teams" },
+  { name: "Calendar", href: "#calendar" },
+  { name: "Standings", href: "#standings" },
+  { name: "Curiosities", href: "#curiosities" },
+];
+
+const contact = [
+  { href: "https://github.com/BarberoPablo/formula1-calendar", icon: <Github />, name: "github" },
+  { href: "https://www.linkedin.com/in/barberopablo/", icon: <Linkedin />, name: "linkedin" },
+  { href: "https://barberopablo.github.io/portfolio/", icon: <BriefcaseBusiness />, name: "portfolio" },
 ];
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className="bg-[#e10600] text-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          <div className="flex items-center">
-            <Link href="/" className="flex-shrink-0">
-              {/* <Image className="h-8 w-auto" src="https://google.png" width={300} height={300} alt="F1 Logo" /> */}
-              F1 Logo
-            </Link>
-          </div>
-          <div className="hidden md:block">
-            <div className="ml-10 flex items-baseline space-x-4">
-              {navItems.map((item) => (
-                <Link key={item.name} href={item.href} className="px-3 py-2 rounded-md text-sm font-medium hover:bg-[#ff0000] hover:text-white">
-                  {item.name}
-                </Link>
-              ))}
-            </div>
-          </div>
+    <nav className="sticky top-0 z-50 shadow-lg bg-[#e10600] text-white">
+      <div className="flex items-center justify-between h-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center">
           <div className="md:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
@@ -42,6 +32,31 @@ export default function Navbar() {
               {isOpen ? <X className="h-6 w-6" /> : <AlignJustify className="h-6 w-6" />}
             </button>
           </div>
+          <div className="items-center hidden md:flex">
+            <Image
+              className="md:block h-8 w-auto hidden"
+              src="https://media.formula1.com/image/upload/f_auto,c_limit,w_195,q_auto/etc/designs/fom-website/images/f1_logo"
+              width={128}
+              height={32}
+              alt="Formula1 Logo"
+            />
+            <div className="ml-10 flex items-baseline space-x-4">
+              {navItems.map((item) => (
+                <a key={item.name} href={item.href} className="px-3 py-2 rounded-md text-sm font-medium hover:bg-[#ff0000] hover:text-white">
+                  {item.name}
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+        <div className="flex space-x-4"></div>
+
+        <div className="flex space-x-4">
+          {contact.map((item) => (
+            <a key={item.name} href={item.href} target="_blank" rel="noopener noreferrer">
+              {item.icon}
+            </a>
+          ))}
         </div>
       </div>
 
@@ -49,9 +64,9 @@ export default function Navbar() {
         <motion.div initial={{ opacity: 0, y: -50 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -50 }} className="md:hidden">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
             {navItems.map((item) => (
-              <Link key={item.name} href={item.href} className="block px-3 py-2 rounded-md text-base font-medium hover:bg-[#ff0000] hover:text-white">
+              <a key={item.name} href={item.href} className="block px-3 py-2 rounded-md text-base font-medium hover:bg-[#ff0000] hover:text-white">
                 {item.name}
-              </Link>
+              </a>
             ))}
           </div>
         </motion.div>

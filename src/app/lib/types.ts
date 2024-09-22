@@ -1,11 +1,3 @@
-export type Race = {
-  id: number;
-  name: string;
-  date: string;
-  circuit: string;
-  status?: string; // Esto es opcional, ya que algunas carreras pueden estar canceladas o tener un estado especial
-};
-
 export type Driver = {
   id: number;
   name: string;
@@ -45,6 +37,72 @@ export type Session = {
   meeting_key: number;
   session_key: number;
   session_name: string;
-  session_type: string;
+  session_type: "Race" | "Qualifying" | "Practice";
   year: number;
 };
+
+export type Race = {
+  season: string;
+  round: string;
+  url: string;
+  raceName: string;
+  Circuit: {
+    circuitId: CircuitId;
+    url: string;
+    circuitName: string;
+    Location: {
+      lat: string;
+      long: string;
+      locality: string;
+      country: string;
+    };
+  };
+  date: string;
+  time: string;
+  FirstPractice: {
+    date: string;
+    time: string;
+  };
+  SecondPractice: {
+    date: string;
+    time: string;
+  };
+  ThirdPractice?: {
+    date: string;
+    time: string;
+  };
+  Qualifying?: {
+    date: string;
+    time: string;
+  };
+  Sprint?: {
+    date: string;
+    time: string;
+  };
+};
+
+export type CircuitId =
+  | "albert_park"
+  | "americas"
+  | "bahrain"
+  | "baku"
+  | "catalunya"
+  | "hungaroring"
+  | "imola"
+  | "interlagos"
+  | "jeddah"
+  | "losail"
+  | "marina_bay"
+  | "miami"
+  | "monaco"
+  | "monza"
+  | "red_bull_ring"
+  | "rodriguez"
+  | "shanghai"
+  | "silverstone"
+  | "spa"
+  | "suzuka"
+  | "vegas"
+  | "villeneuve"
+  | "yas_marina"
+  | "zandvoort";
