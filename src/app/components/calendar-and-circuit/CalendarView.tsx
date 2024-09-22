@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import type { Race } from "../../lib/types";
-import { createDate, getDaysInMonth, getFirstDayOfMonth } from "../../lib/utils";
+import { getDaysInMonth, getFirstDayOfMonth, getSessions } from "../../lib/utils";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 interface CalendarViewProps {
@@ -34,21 +34,14 @@ const CalendarView: React.FC<CalendarViewProps> = ({ races, onRaceClick }) => {
 
     for (let day = 1; day <= daysInMonth; day++) {
       const date = new Date(year, month, day);
-      const race = races.find(
-        (race) =>
-          createDate(race.date, race.time).toDateString() === date.toDateString() ||
-          createDate(race.FirstPractice.date, race.FirstPractice.time).toDateString() === date.toDateString() ||
-          createDate(race.SecondPractice.date, race.SecondPractice.time).toDateString() === date.toDateString() ||
-          (race.ThirdPractice && createDate(race.ThirdPractice.date, race.ThirdPractice.time).toDateString() === date.toDateString()) ||
-          (race.Qualifying && createDate(race.Qualifying.date, race.Qualifying.time).toDateString() === date.toDateString()) ||
-          (race.Sprint && createDate(race.Sprint.date, race.Sprint.time).toDateString() === date.toDateString())
-      );
+      const race = races.find((race) => getSessions(race).find((session) => session.date?.toDateString() === date.toDateString()));
+
       days.push(
         <div key={day} className="flex justify-center items-center h-10">
           {race ? (
             <a
               href="#race-info"
-              className={"h-10 w-10 flex items-center justify-center rounded-full bg-[#e10600] text-white"}
+              className={"h-[29px] w-[29px] flex items-center justify-center rounded-full bg-[#e10600] text-white"}
               onClick={() => race && onRaceClick(race, day)}
             >
               {day}
@@ -64,9 +57,9 @@ const CalendarView: React.FC<CalendarViewProps> = ({ races, onRaceClick }) => {
   };
 
   return (
-    <div className="p-4" id="calendar">
+    <div id="calendar" className="lg:p-4">
       <h2 className="text-2xl font-bold mb-4 text-[#e10600]">2024 F1 Calendar</h2>
-      <div className="bg-white p-4 rounded-lg shadow-md">
+      <div className="m-auto w-72 lg:w-80 bg-white p-4 rounded-lg shadow-md">
         <div className="flex justify-between items-center mb-4">
           <button onClick={handlePrevMonth} className="p-2 rounded-full hover:bg-gray-200">
             <ChevronLeft className="text-[#e10600]" />

@@ -36,7 +36,7 @@ export function getSessions(race: Race): {
 export function getNextSession(race: Race) {
   const sessions = getSessions(race);
   const now = new Date();
-  const nextSession = sessions.find((session) => session.date && session.date > now);
+  const nextSession = sessions.find((session, index) => session.date && session.date > now && (!sessions[index + 1] || sessions[index + 1]?.date < now));
 
   return nextSession;
 }

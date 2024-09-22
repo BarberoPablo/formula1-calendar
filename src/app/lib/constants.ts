@@ -1,5 +1,7 @@
 import { CircuitId, TeamName } from "./types";
 
+export const totalRaces = 24;
+
 export const teamColors: { [key in TeamName]: string[] } = {
   "Red Bull Racing": ["#0600EF", "#FF0000"],
   Mercedes: ["#00D2BE"],
