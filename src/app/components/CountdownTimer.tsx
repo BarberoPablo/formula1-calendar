@@ -25,10 +25,9 @@ export default function CountdownTimer({ nextRace }: { nextRace: Race }) {
   const nextSession = useMemo(() => getNextSession(nextRace), [nextRace]);
 
   useEffect(() => {
-    const now = new Date();
-
     if (nextSession) {
       const tick = () => {
+        const now = new Date();
         const timeLeft = timeLeftForRace(nextSession.date, now);
         setTimeLeft(timeLeft);
 
@@ -48,6 +47,7 @@ export default function CountdownTimer({ nextRace }: { nextRace: Race }) {
       const raceTime = createDate(nextRace.date, nextRace.time);
       setRaceInProgress(true);
       if (raceTime) {
+        const now = new Date();
         const raceStartedHoursAgo = timeLeftForRace(raceTime, now).hrs;
         setTimeLeft({ days: 0, hrs: Math.abs(raceStartedHoursAgo), mins: 0, secs: 0 });
       }
@@ -105,7 +105,7 @@ export default function CountdownTimer({ nextRace }: { nextRace: Race }) {
             <Image src={watch.minutes} priority width={90} height={90} alt="watch minutes" />
           </div>
           <div
-            className="absolute z-30 w-full h-full transform origin-center transition-transform duration-1000"
+            className="absolute z-30 w-full h-full transform origin-center transition-transform duration-1000 ease-linear"
             style={{ transform: `rotate(${currentTime.secs * 6}deg)` }}
           >
             <Image src={watch.seconds} width={90} height={90} alt="watch seconds" />
