@@ -12,6 +12,7 @@ export default function CalendarAndCircuit({ races }: { races: Race[] }) {
     /* If day is different from race.day => its a qualy || practice || sprint 
       show all data from that day, all that matches, if 2 practices matches, array and set a state with array of things to show
     */
+    /* Separate and use Zustand to comunicate CalendarView with CircuitView */
     setSelectedRace(race);
     console.log({ race });
     console.log({ day });
