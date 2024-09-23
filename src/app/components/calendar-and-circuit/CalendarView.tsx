@@ -1,16 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import type { Race } from "../../lib/types";
 import { getDaysInMonth, getFirstDayOfMonth, getSessions } from "../../lib/utils";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
-interface CalendarViewProps {
-  races: Race[];
-  onRaceClick: (race: Race, date: Date) => void;
-}
-
 const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
-const CalendarView: React.FC<CalendarViewProps> = ({ races, onRaceClick }) => {
+export default function CalendarView({ races, onRaceClick }: { races: Race[]; onRaceClick: (race: Race, date: Date) => void }) {
   const [currentDate, setCurrentDate] = useState(new Date());
 
   const handlePrevMonth = () => {
@@ -21,7 +16,7 @@ const CalendarView: React.FC<CalendarViewProps> = ({ races, onRaceClick }) => {
     setCurrentDate((prev) => new Date(prev.getFullYear(), prev.getMonth() + 1, 1));
   };
 
-  const renderCalendar = () => {
+  const renderCalendar = useCallback(() => {
     const year = currentDate.getFullYear();
     const month = currentDate.getMonth();
     const daysInMonth = getDaysInMonth(year, month);
@@ -39,13 +34,23 @@ const CalendarView: React.FC<CalendarViewProps> = ({ races, onRaceClick }) => {
       days.push(
         <div key={day} className="flex justify-center items-center h-10">
           {race ? (
-            <a
-              href="#race-info"
-              className={"h-[29px] w-[29px] flex items-center justify-center rounded-full bg-[#e10600] text-white"}
-              onClick={() => race && onRaceClick(race, date)}
-            >
-              {day}
-            </a>
+            <>
+              {/* Does not render on lg screens: */}
+              <a
+                href="#race-info"
+                className="lg:hidden h-[29px] w-[29px] flex items-center justify-center rounded-full bg-[#e10600] text-white "
+                onClick={() => race && onRaceClick(race, date)}
+              >
+                {day}
+              </a>
+              {/* Only renders on lg screens: */}
+              <button
+                className="hidden lg:flex h-[29px] w-[29px] items-center justify-center rounded-full bg-[#e10600] text-white"
+                onClick={() => race && onRaceClick(race, date)}
+              >
+                {day}
+              </button>
+            </>
           ) : (
             <div className={"h-10 w-10 flex items-center justify-center rounded-full"}>{day}</div>
           )}
@@ -54,7 +59,7 @@ const CalendarView: React.FC<CalendarViewProps> = ({ races, onRaceClick }) => {
     }
 
     return days;
-  };
+  }, [currentDate, races, onRaceClick]);
 
   return (
     <div id="schedule" className="lg:p-4">
@@ -82,6 +87,4 @@ const CalendarView: React.FC<CalendarViewProps> = ({ races, onRaceClick }) => {
       </div>
     </div>
   );
-};
-
-export default CalendarView;
+}

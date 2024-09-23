@@ -20,7 +20,7 @@ export default function CalendarAndCircuit({ races }: { races: Race[] }) {
   };
 
   return (
-    <div className="p-4">
+    <div className="p-4 flex flex-col lg:flex-row justify-center">
       <CalendarView races={races} onRaceClick={handleRaceClick} />
       <CircuitView selectedRace={selectedRace} />
     </div>

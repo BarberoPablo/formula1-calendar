@@ -12,8 +12,8 @@ export default function CircuitView({ selectedRace }: { selectedRace: Race | nul
         <motion.div
           id="race-info"
           key={selectedRace.raceName}
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, x: 300 }}
+          animate={{ opacity: 1, x: 0 }}
           className="relative flex flex-col justify-between lg:flex-row mt-14 py-10 lg:py-6 space-y-4 rounded-tr-3xl lg:shadow-lg border-t-[10px] border-r-[10px] border-[#e10600] bg-cover bg-center"
         >
           <div className="absolute flex flex-col lg:flex-row lg:bg-gray-100 -top-5 left-0">
@@ -39,9 +39,7 @@ export default function CircuitView({ selectedRace }: { selectedRace: Race | nul
               <FramedInfo title="Circuit Length" bigContent={circuitsImages[selectedRace.Circuit.circuitId].circuitLength} smallContent="km" />
               <FramedInfo
                 title="Race Distance"
-                bigContent={(circuitsImages[selectedRace.Circuit.circuitId].laps * circuitsImages[selectedRace.Circuit.circuitId].circuitLength).toFixed(
-                  3
-                )}
+                bigContent={circuitsImages[selectedRace.Circuit.circuitId].laps * circuitsImages[selectedRace.Circuit.circuitId].circuitLength}
                 smallContent="km"
               />
             </div>
