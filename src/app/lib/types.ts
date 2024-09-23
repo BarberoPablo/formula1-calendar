@@ -1,17 +1,3 @@
-export type oldDriver = {
-  id: number;
-  name: string;
-  "short-name": string;
-  team: TeamId;
-  points: number;
-};
-
-export type Team = {
-  id: number;
-  name: TeamId;
-  points: number;
-};
-
 export type TeamId = "red_bull" | "mercedes" | "ferrari" | "mclaren" | "aston_martin" | "alpine" | "rb" | "sauber" | "haas" | "williams";
 
 export type Session = {
