@@ -1,9 +1,11 @@
+import { circuitsImages } from "@/app/lib/constants";
 import { Race } from "@/app/lib/types";
 import { getSessions } from "@/app/lib/utils";
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 
 export default function CircuitView({ selectedRace }: { selectedRace: Race | null }) {
+  console.log({ selectedRace });
   return (
     <AnimatePresence>
       {selectedRace && (
@@ -20,28 +22,28 @@ export default function CircuitView({ selectedRace }: { selectedRace: Race | nul
                 className="max-w-14 rounded-s"
                 width={56}
                 height={32}
-                src="https://media.formula1.com/image/upload/f_auto,c_limit,q_auto,w_1000/content/dam/fom-website/2018-redesign-assets/Flags%2016x9/singapore-flag"
-                alt="Singapore flag"
+                src={circuitsImages[selectedRace.Circuit.circuitId].flag}
+                alt="Circuit country flag"
               />
             </div>
             <h2 className="lg:mx-5 text-2xl text-black font-bold">{selectedRace.Circuit.circuitName}</h2>
           </div>
 
           <div>
-            <Image
-              src="https://media.formula1.com/image/upload/f_auto,c_limit,q_auto,w_1320/content/dam/fom-website/2018-redesign-assets/Circuit%20maps%2016x9/Singapore_Circuit"
-              alt="Singapore Circuit"
-              width={732}
-              height={412}
-            />
+            <Image src={circuitsImages[selectedRace.Circuit.circuitId].circuit} alt="Circuit map" width={732} height={412} />
           </div>
 
           <div className="flex flex-col w-full lg:max-w-[500px]">
             <div className="grid grid-cols-1 sm:grid-cols-2 w-full h-fit gap-x-2 gap-y-5 pr-5 mb-4">
-              <FramedInfo title="Number of Laps" bigContent="62" />
-              <FramedInfo title="Circuit Length" bigContent="4.94" smallContent="km" />
-              <FramedInfo title="Circuit Length" bigContent="4.94" smallContent="km" />
-              <FramedInfo title="Circuit Length" bigContent="4.94" smallContent="km" />
+              <FramedInfo title="Number of Laps" bigContent={circuitsImages[selectedRace.Circuit.circuitId].laps} />
+              <FramedInfo title="Circuit Length" bigContent={circuitsImages[selectedRace.Circuit.circuitId].circuitLength} smallContent="km" />
+              <FramedInfo
+                title="Race Distance"
+                bigContent={(circuitsImages[selectedRace.Circuit.circuitId].laps * circuitsImages[selectedRace.Circuit.circuitId].circuitLength).toFixed(
+                  3
+                )}
+                smallContent="km"
+              />
             </div>
             <SessionDates race={selectedRace} />
           </div>
@@ -51,7 +53,7 @@ export default function CircuitView({ selectedRace }: { selectedRace: Race | nul
   );
 }
 
-function FramedInfo({ title, bigContent, smallContent }: { title: string; bigContent: string; smallContent?: string }) {
+function FramedInfo({ title, bigContent, smallContent }: { title: string; bigContent: string | number; smallContent?: string | number }) {
   return (
     <div className="flex flex-col w-full h-fit pb-5 pr-5 text-black rounded-br-2xl border-b-2 border-r-2 border-gray-300">
       <div>

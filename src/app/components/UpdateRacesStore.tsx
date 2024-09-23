@@ -5,14 +5,17 @@ import { Race } from "../lib/types";
 import { useRacesStore } from "../stores/racesStore";
 
 // This component will not render anything, its purpose is to update the store
-export default function UpdateRaceStore({ nextRace }: { nextRace: Race | null }) {
-  const { setNextRace } = useRacesStore();
+export default function UpdateRaceStore({ nextRace, allRaces }: { nextRace: Race | null; allRaces: Race[] }) {
+  const { setNextRace, setAllRaces } = useRacesStore();
 
   useEffect(() => {
     if (nextRace) {
       setNextRace(nextRace);
     }
-  }, [nextRace, setNextRace]);
+    if (allRaces) {
+      setAllRaces(allRaces);
+    }
+  }, [nextRace, setNextRace, allRaces, setAllRaces]);
 
   return null;
 }

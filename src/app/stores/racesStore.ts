@@ -4,19 +4,27 @@ import { Race } from "../lib/types";
 
 interface State {
   nextRace: Race | null;
+  allRaces: Race[] | null;
+  calendarSelectedDate: Date | null;
 }
 
 interface Actions {
   setNextRace: (race: Race) => void;
+  setAllRaces: (races: Race[]) => void;
   fetchNextRace: () => Promise<void>;
+  setCalendarSelectedDate: (date: Date) => void;
 }
 
 export const useRacesStore = create<State & Actions>()((set) => ({
-  /* State */
+  /* Initial State */
+  calendarSelectedDate: null,
+  allRaces: null,
   nextRace: null,
 
   /* Actions */
   setNextRace: (race: Race) => set({ nextRace: race }),
+
+  setAllRaces: (races: Race[]) => set({ allRaces: races }),
 
   fetchNextRace: async () => {
     try {
@@ -26,4 +34,6 @@ export const useRacesStore = create<State & Actions>()((set) => ({
       console.error("Error fetching next race:", error);
     }
   },
+
+  setCalendarSelectedDate: (date: Date) => set({ calendarSelectedDate: date }),
 }));

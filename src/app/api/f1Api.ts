@@ -5,7 +5,7 @@ const baseUrl = "https://ergast.com/api/f1/";
 //Races
 //Next race: https://ergast.com/api/f1/current/next.json
 //All races dates and circuit details: https://ergast.com/api/f1/2024.json (should also store round to access race details (winners))
-//Details for specific race: https://ergast.com/api/f1/2024/{round}/results.json
+//Details for specific race: https://ergast.com/api/f1/2024/1/results.json
 
 //Standings
 //Drivers

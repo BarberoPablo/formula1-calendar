@@ -5,7 +5,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 
 interface CalendarViewProps {
   races: Race[];
-  onRaceClick: (race: Race, day: number) => void;
+  onRaceClick: (race: Race, date: Date) => void;
 }
 
 const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
@@ -42,7 +42,7 @@ const CalendarView: React.FC<CalendarViewProps> = ({ races, onRaceClick }) => {
             <a
               href="#race-info"
               className={"h-[29px] w-[29px] flex items-center justify-center rounded-full bg-[#e10600] text-white"}
-              onClick={() => race && onRaceClick(race, day)}
+              onClick={() => race && onRaceClick(race, date)}
             >
               {day}
             </a>
@@ -57,7 +57,7 @@ const CalendarView: React.FC<CalendarViewProps> = ({ races, onRaceClick }) => {
   };
 
   return (
-    <div id="calendar" className="lg:p-4">
+    <div id="schedule" className="lg:p-4">
       <h2 className="text-2xl font-bold mb-4 text-[#e10600]">2024 F1 Calendar</h2>
       <div className="m-auto w-72 lg:w-80 bg-white p-4 rounded-lg shadow-md">
         <div className="flex justify-between items-center mb-4">

@@ -6,7 +6,7 @@ import Image from "next/image";
 import { useState } from "react";
 
 const navItems = [
-  { name: "Calendar", href: "#calendar" },
+  { name: "Schedule", href: "#schedule" },
   { name: "Standings", href: "#standings" },
   { name: "Curiosities", href: "#curiosities" },
 ];

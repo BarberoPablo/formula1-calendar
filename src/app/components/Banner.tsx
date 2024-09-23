@@ -4,7 +4,6 @@ import { circuitsImages, yearImage } from "@/app/lib/constants";
 import { Race } from "@/app/lib/types";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import React from "react";
 
 export default function Banner({ nextRace }: { nextRace: Race }) {
   return (
@@ -13,7 +12,7 @@ export default function Banner({ nextRace }: { nextRace: Race }) {
       animate={{ opacity: 1, y: 0 }}
       className="relative w-full h-48 lg:h-96 py-6 lg:shadow-lg bg-cover bg-center"
       style={{
-        backgroundImage: `url(${circuitsImages[nextRace.Circuit.circuitId]})`,
+        backgroundImage: `url(${circuitsImages[nextRace.Circuit.circuitId].banner})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
