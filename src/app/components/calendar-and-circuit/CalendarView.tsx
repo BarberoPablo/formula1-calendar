@@ -1,11 +1,11 @@
-import React, { useState, useCallback } from "react";
-import type { Race } from "../../lib/types";
-import { getDaysInMonth, getFirstDayOfMonth, getSessions } from "../../lib/utils";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useCallback, useState } from "react";
+import type { Race } from "../../lib/types";
+import { createDate, getDaysInMonth, getFirstDayOfMonth } from "../../lib/utils";
 
 const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
-export default function CalendarView({ races, onRaceClick }: { races: Race[]; onRaceClick: (race: Race, date: Date) => void }) {
+export default function CalendarView({ races, onRaceClick }: { races: Race[]; onRaceClick: (race: Race /* trackId: number */) => void }) {
   const [currentDate, setCurrentDate] = useState(new Date());
 
   const handlePrevMonth = () => {
@@ -29,7 +29,7 @@ export default function CalendarView({ races, onRaceClick }: { races: Race[]; on
 
     for (let day = 1; day <= daysInMonth; day++) {
       const date = new Date(year, month, day);
-      const race = races.find((race) => getSessions(race).find((session) => session.date?.toDateString() === date.toDateString()));
+      const race = races.find((race) => createDate(race.date, race.time)?.toDateString() === date.toDateString());
 
       days.push(
         <div key={day} className="flex justify-center items-center h-10">
@@ -39,14 +39,14 @@ export default function CalendarView({ races, onRaceClick }: { races: Race[]; on
               <a
                 href="#race-info"
                 className="lg:hidden h-[29px] w-[29px] flex items-center justify-center rounded-full bg-[#e10600] text-white "
-                onClick={() => race && onRaceClick(race, date)}
+                onClick={() => race && onRaceClick(race)}
               >
                 {day}
               </a>
               {/* Only renders on lg screens: */}
               <button
                 className="hidden lg:flex h-[29px] w-[29px] items-center justify-center rounded-full bg-[#e10600] text-white"
-                onClick={() => race && onRaceClick(race, date)}
+                onClick={() => race && onRaceClick(race)}
               >
                 {day}
               </button>

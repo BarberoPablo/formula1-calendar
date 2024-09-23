@@ -39,7 +39,9 @@ export default function CircuitView({ selectedRace }: { selectedRace: Race | nul
               <FramedInfo title="Circuit Length" bigContent={circuitsImages[selectedRace.Circuit.circuitId].circuitLength} smallContent="km" />
               <FramedInfo
                 title="Race Distance"
-                bigContent={circuitsImages[selectedRace.Circuit.circuitId].laps * circuitsImages[selectedRace.Circuit.circuitId].circuitLength}
+                bigContent={(circuitsImages[selectedRace.Circuit.circuitId].laps * circuitsImages[selectedRace.Circuit.circuitId].circuitLength).toFixed(
+                  1
+                )}
                 smallContent="km"
               />
             </div>
