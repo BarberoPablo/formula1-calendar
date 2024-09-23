@@ -1,28 +1,18 @@
-export type Driver = {
+export type oldDriver = {
   id: number;
   name: string;
   "short-name": string;
-  team: TeamName;
+  team: TeamId;
   points: number;
 };
 
 export type Team = {
   id: number;
-  name: TeamName;
+  name: TeamId;
   points: number;
 };
 
-export type TeamName =
-  | "Red Bull Racing"
-  | "Mercedes"
-  | "Ferrari"
-  | "McLaren"
-  | "Aston Martin"
-  | "Alpine"
-  | "AlphaTauri"
-  | "Alfa Romeo"
-  | "Haas F1 Team"
-  | "Williams";
+export type TeamId = "red_bull" | "mercedes" | "ferrari" | "mclaren" | "aston_martin" | "alpine" | "rb" | "sauber" | "haas" | "williams";
 
 export type Session = {
   circuit_key: number;
@@ -106,3 +96,41 @@ export type CircuitId =
   | "villeneuve"
   | "yas_marina"
   | "zandvoort";
+
+export type DriversStandingsAPI = {
+  position: string;
+  positionText: string;
+  points: string;
+  wins: string;
+  Driver: {
+    driverId: string;
+    permanentNumber: string;
+    code: string;
+    url: string;
+    givenName: string;
+    familyName: string;
+    dateOfBirth: string;
+    nationality: string;
+  };
+  Constructors: [
+    {
+      constructorId: TeamId;
+      url: string;
+      name: TeamId;
+      nationality: string;
+    }
+  ];
+};
+
+export type TeamsStandingsAPI = {
+  position: string;
+  positionText: string;
+  points: string;
+  wins: string;
+  Constructor: {
+    constructorId: TeamId;
+    url: string;
+    name: string;
+    nationality: string;
+  };
+};

@@ -1,4 +1,4 @@
-import { Race } from "../lib/types";
+import { DriversStandingsAPI, Race, TeamsStandingsAPI } from "../lib/types";
 
 const baseUrl = "https://ergast.com/api/f1/";
 
@@ -19,6 +19,8 @@ export const endpoint = {
   //sessions: (year: number) => baseUrl + `sessions?year=${year}`,
   "next-race": baseUrl + "current/next.json",
   "all-races": (year: string) => baseUrl + `${year}.json`,
+  "drivers-standings": (year: string, round?: string) => baseUrl + `${year}/${round ? `${round}/` : ""}driverStandings.json`,
+  "teams-standings": (year: string, round?: string) => baseUrl + `${year}/${round ? `${round}/` : ""}constructorStandings.json`,
 };
 
 export const f1Api = {
@@ -45,6 +47,38 @@ export const f1Api = {
 
       const data = await response.json();
       return data.MRData.RaceTable.Races;
+    } catch (error) {
+      console.error("Error fetching the next race:", error);
+      return [];
+    }
+  },
+
+  async getDriversStandings(year: string): Promise<DriversStandingsAPI[] | []> {
+    try {
+      const response = await fetch(endpoint["drivers-standings"](year));
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+
+      return data.MRData.StandingsTable.StandingsLists[0].DriverStandings;
+    } catch (error) {
+      console.error("Error fetching the next race:", error);
+      return [];
+    }
+  },
+
+  async getTeamsStandings(year: string): Promise<TeamsStandingsAPI[] | []> {
+    try {
+      const response = await fetch(endpoint["teams-standings"](year));
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+
+      return data.MRData.StandingsTable.StandingsLists[0].ConstructorStandings;
     } catch (error) {
       console.error("Error fetching the next race:", error);
       return [];

@@ -62,7 +62,7 @@ export default function CountdownTimer({ nextRace }: { nextRace: Race }) {
     >
       <div className="flex flex-col items-center">
         <h2 className="text-sm mb-2 w-full text-center border-b-[1px] border-gray-400">{nextSession?.event.toUpperCase() || "Race in Progress"}</h2>
-        {nextSession?.event && <h3 className="text-xs mb-1 w-full text-center">In {timeLeft.days && `${timeLeft.days} days`} and:</h3>}
+        {nextSession?.event && <h3 className="text-xs mb-1 w-full text-center">Next event in {timeLeft.days && `${timeLeft.days} days`} and:</h3>}
         <div className="flex">
           {raceInProgress ? (
             <div>

@@ -5,7 +5,6 @@ import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 
 export default function CircuitView({ selectedRace }: { selectedRace: Race | null }) {
-  console.log({ selectedRace });
   return (
     <AnimatePresence>
       {selectedRace && (

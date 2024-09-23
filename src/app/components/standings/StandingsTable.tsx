@@ -1,11 +1,17 @@
 "use client";
 
 import { teamColors } from "@/app/lib/constants";
-import { drivers, teams } from "@/app/lib/mockData";
-import type { Driver, Team } from "@/app/lib/types";
+import type { DriversStandingsAPI, TeamsStandingsAPI } from "@/app/lib/types";
+import { useRacesStore } from "@/app/stores/racesStore";
 import { AnimatePresence, motion } from "framer-motion";
 
 export default function StandingsTable({ showDrivers, setShowDrivers }: { showDrivers: boolean; setShowDrivers: (showDrivers: boolean) => void }) {
+  const { driversStandings, teamsStandings } = useRacesStore();
+
+  if (!driversStandings) {
+    return null;
+  }
+
   return (
     <div id="standings" className="p-4">
       <h2 className="text-2xl font-bold mb-4 text-[#e10600]">Standings</h2>
@@ -36,26 +42,40 @@ export default function StandingsTable({ showDrivers, setShowDrivers }: { showDr
                   <th className="py-3 px-6 text-left">Points</th>
                 </tr>
               </thead>
-              <tbody className="text-sm">
-                {(showDrivers ? drivers : teams).map((item, index) => (
-                  <tr
-                    key={item.id}
-                    className={`border-b border-gray-200 hover:bg-gray-100 ${index % 2 && "bg-gray-50"} border-l-4`}
-                    style={{
-                      borderLeftColor: showDrivers ? teamColors[(item as Driver).team][0] : teamColors[(item as Team).name][0],
-                    }}
-                  >
-                    <td className="h-full py-3 px-6 flex justify-center">{index + 1}</td>
-                    <td className="h-full py-3 px-6 text-left">{item.name}</td>
-                    {showDrivers && <td className="h-full py-3 px-6 text-left">{(item as Driver).team}</td>}
-                    <td className="h-full py-3 px-6 text-left">{item.points}</td>
-                  </tr>
-                ))}
-              </tbody>
+              <tbody className="text-sm">{showDrivers ? DriversTableBody(driversStandings) : TeamsTableBody(teamsStandings)}</tbody>
             </table>
           </div>
         </motion.div>
       </AnimatePresence>
     </div>
   );
+}
+
+function DriversTableBody(driversStandings: DriversStandingsAPI[]) {
+  return driversStandings.map((driverStanding, index) => (
+    <tr
+      key={driverStanding.Driver.driverId}
+      className={`border-b border-gray-200 hover:bg-gray-100 ${index % 2 && "bg-gray-50"} border-l-4`}
+      style={{ borderLeftColor: teamColors[driverStanding.Constructors[driverStanding.Constructors.length - 1].constructorId][0] }}
+    >
+      <td className="h-full py-3 px-6 flex justify-center">{index + 1}</td>
+      <td className="h-full py-3 px-6 text-left">{driverStanding.Driver.givenName + " " + driverStanding.Driver.familyName}</td>
+      <td className="h-full py-3 px-6 text-left">{driverStanding.Constructors[driverStanding.Constructors.length - 1].name}</td>
+      <td className="h-full py-3 px-6 text-left">{driverStanding.points}</td>
+    </tr>
+  ));
+}
+
+function TeamsTableBody(teamsStandings: TeamsStandingsAPI[]) {
+  return teamsStandings.map((team, index) => (
+    <tr
+      key={team.Constructor.constructorId}
+      className={`border-b border-gray-200 hover:bg-gray-100 ${index % 2 && "bg-gray-50"} border-l-4`}
+      style={{ borderLeftColor: teamColors[team.Constructor.constructorId][0] }}
+    >
+      <td className="h-full py-3 px-6 flex justify-center">{index + 1}</td>
+      <td className="h-full py-3 px-6 text-left">{team.Constructor.name}</td>
+      <td className="h-full py-3 px-6 text-left">{team.points}</td>
+    </tr>
+  ));
 }

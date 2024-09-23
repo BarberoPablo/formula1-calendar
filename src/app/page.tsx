@@ -5,13 +5,19 @@ import CountdownTimer from "./components/CountdownTimer";
 import F1Curiosities from "./components/F1Curiosities";
 import Standings from "./components/standings";
 import UpdateRaceStore from "./components/UpdateRacesStore"; // Componente cliente para actualizar el store
+import { apiYear } from "./lib/constants";
 
 export default async function Home() {
-  const [nextRace, races] = await Promise.all([f1Api.getNextRace(), f1Api.getAllRaces("2024")]);
+  const [nextRace, races, driversStandings, teamsStandings] = await Promise.all([
+    f1Api.getNextRace(),
+    f1Api.getAllRaces(apiYear),
+    f1Api.getDriversStandings(apiYear),
+    f1Api.getTeamsStandings(apiYear),
+  ]);
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-center bg-gray-100">
-      <UpdateRaceStore nextRace={nextRace} allRaces={races} />
+      <UpdateRaceStore nextRace={nextRace} allRaces={races} driversStandings={driversStandings} teamsStandings={teamsStandings} />
 
       {nextRace && <Banner nextRace={nextRace} />}
       <div className="w-full max-w-7xl space-y-8 mt-8 text-gray-700 overflow-x-hidden">

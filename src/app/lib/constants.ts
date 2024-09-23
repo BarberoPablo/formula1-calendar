@@ -1,18 +1,20 @@
-import { CircuitId, TeamName } from "./types";
+import { CircuitId, TeamId } from "./types";
 
 export const totalRaces = 24;
 
-export const teamColors: { [key in TeamName]: string[] } = {
-  "Red Bull Racing": ["#0600EF", "#FF0000"],
-  Mercedes: ["#00D2BE"],
-  Ferrari: ["#DC0000"],
-  McLaren: ["#FF8700"],
-  "Aston Martin": ["#006F62"],
-  Alpine: ["#0090FF"],
-  AlphaTauri: ["#2B4562"],
-  "Alfa Romeo": ["#900000"],
-  "Haas F1 Team": ["#FF0000", "#FFFFFF"],
-  Williams: ["#005AFF"],
+export const apiYear = "2024";
+
+export const teamColors: { [key in TeamId]: string[] } = {
+  red_bull: ["#0600EF", "#FF0000"],
+  mercedes: ["#00D2BE"],
+  ferrari: ["#DC0000"],
+  mclaren: ["#FF8700"],
+  aston_martin: ["#006F62"],
+  alpine: ["#0090FF"],
+  rb: ["#2B4562"],
+  sauber: ["#00B140"], //#0FD11C
+  haas: ["#FF0000", "#FFFFFF"],
+  williams: ["#005AFF"],
 };
 
 export const yearImage = "https://media.formula1.com/content/dam/fom-website/2018-redesign-assets/year%20icon/2024.png";
