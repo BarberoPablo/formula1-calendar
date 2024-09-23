@@ -29,3 +29,30 @@ html {
   scroll-behavior: smooth;
   scroll-padding-top: 80px;
 }
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #747474;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #aaa;
+}
+
+/* Estilos del scrollbar para Firefox */
+* {
+  scrollbar-width: thin;
+  /* Hacer el scrollbar delgado */
+  scrollbar-color: #747474 transparent;
+  /* Color del thumb y del fondo */
+}
+
+/* Efecto hover para Firefox */
+*::-moz-scrollbar-thumb:hover {
+  background-color: #aaa;
+}

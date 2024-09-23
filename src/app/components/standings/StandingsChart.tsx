@@ -1,16 +1,27 @@
 import { teamColors } from "@/app/lib/constants";
 import { Driver, Team } from "@/app/lib/types";
-import { BarChart, Bar, XAxis, YAxis, Tooltip, Cell } from "recharts"; // Asegúrate de importar correctamente
+import { useEffect, useState } from "react";
 import type { TooltipProps } from "recharts";
+import { Bar, BarChart, Cell, Tooltip, XAxis, YAxis } from "recharts"; // Asegúrate de importar correctamente
 
 export default function StandingsChart({ data }: { data: Driver[] | Team[] }) {
-  const xAxisDataKey = data.length === 10 ? "name" : "short-name"; // Parámetro predeterminado para XAxis
-  const yAxisLabel = { value: "Points", angle: -90, position: "insideLeft", offset: 10 }; // Parámetro predeterminado para YAxis
+  const [isClient, setIsClient] = useState(false); // Verificar si estamos en el cliente
+
+  useEffect(() => {
+    setIsClient(true); // This executes in Client side only
+  }, []);
+
+  if (!isClient) {
+    return null; // Dont Render graphic in SSR because of hidratation problems
+  }
+
+  const xAxisLabel = { value: (data[0] as Driver).team ? "Drivers" : "Teams" };
+  const yAxisLabel = { value: "Points", angle: -90, position: "insideLeft", offset: 10 };
 
   return (
-    <BarChart width={300} height={300} data={data}>
-      <XAxis dataKey={xAxisDataKey} /> {/* Se usa la variable en lugar de defaultProps */}
-      <YAxis label={yAxisLabel} /> {/* Se usa la variable en lugar de defaultProps */}
+    <BarChart width={420} height={420} data={data} className="hidden md:flex lg:w-[600px] lg:h-[600px]">
+      <XAxis label={xAxisLabel} tick={false} />
+      <YAxis label={yAxisLabel} />
       <Tooltip content={<CustomTooltip />} />
       <Bar dataKey="points">
         {data.map((_, index) => (
@@ -23,7 +34,8 @@ export default function StandingsChart({ data }: { data: Driver[] | Team[] }) {
           return (
             <linearGradient key={`gradient-${index}`} id={`gradient-${index}`} x1="0" y1="0" x2="0" y2="1">
               {colors.map((color, colorIndex) => (
-                <stop key={`color-${colorIndex}`} offset={`${(colorIndex / (colors.length - 1)) * 100}%`} stopColor={color} />
+                /* + 1 to avoid 0/0 */
+                <stop key={`color-${colorIndex}`} offset={`${((colorIndex + 1) / (colors.length + 1)) * 100}%`} stopColor={color} />
               ))}
             </linearGradient>
           );

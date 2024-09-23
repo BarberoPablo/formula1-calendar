@@ -14,7 +14,7 @@ export default function CircuitView({ selectedRace }: { selectedRace: Race | nul
           key={selectedRace.raceName}
           initial={{ opacity: 0, x: 300 }}
           animate={{ opacity: 1, x: 0 }}
-          className="relative flex flex-col justify-between lg:flex-row mt-14 py-10 lg:py-6 space-y-4 rounded-tr-3xl lg:shadow-lg border-t-[10px] border-r-[10px] border-[#e10600] bg-cover bg-center"
+          className="relative flex flex-col justify-between lg:flex-row mt-14 py-10 lg:py-6 space-y-4 rounded-tr-3xl border-t-[10px] border-r-[10px] border-[#e10600] bg-cover bg-center"
         >
           <div className="absolute flex flex-col lg:flex-row lg:bg-gray-100 -top-5 left-0">
             <div className="bg-gray-100 w-28 lg:w-14 pl-4 lg:pl-0">
