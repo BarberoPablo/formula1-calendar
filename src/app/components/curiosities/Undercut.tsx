@@ -98,7 +98,7 @@ export default function Undercut({ activeCard, setActiveCard }: { activeCard: st
                     <tbody>
                       <tr className="hover:bg-gray-50">
                         {tableBody.map((time, index) => (
-                          <td key={time} className={`py-2 px-4 border-b ${(index === 2 || index === 3) && "hidden md:table-cell"}`}>
+                          <td key={time + index} className={`py-2 px-4 border-b ${(index === 2 || index === 3) && "hidden md:table-cell"}`}>
                             {time}
                           </td>
                         ))}
