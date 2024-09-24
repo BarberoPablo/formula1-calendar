@@ -2,7 +2,7 @@ import { f1Api } from "./api/f1Api";
 import Banner from "./components/Banner";
 import CalendarAndCircuit from "./components/calendar-and-circuit/index";
 import CountdownTimer from "./components/CountdownTimer";
-import F1Curiosities from "./components/F1Curiosities";
+import Curiosities from "./components/curiosities";
 import Standings from "./components/standings";
 import UpdateRaceStore from "./components/UpdateRacesStore"; // Componente cliente para actualizar el store
 import { apiYear } from "./lib/constants";
@@ -29,7 +29,7 @@ export default async function Home() {
 
         <CalendarAndCircuit races={races} />
         <Standings />
-        <F1Curiosities />
+        <Curiosities />
       </div>
     </main>
   );

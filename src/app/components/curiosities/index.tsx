@@ -2,9 +2,9 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { curiosities } from "../lib/utils";
+import { curiosities } from "./animations";
 
-export default function F1Curiosities() {
+export default function Curiosities() {
   const [activeCard, setActiveCard] = useState<number | null>(null);
 
   return (
