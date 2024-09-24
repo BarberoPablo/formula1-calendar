@@ -1,11 +1,18 @@
 "use client";
 
+import { motion } from "framer-motion";
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { curiosities } from "./animations";
+import Pitstops from "./Pitstops";
+import Undercut from "./Undercut";
+import DRS from "./Drs";
 
 export default function Curiosities() {
-  const [activeCard, setActiveCard] = useState<number | null>(null);
+  const [activeCard, setActiveCard] = useState<string | null>(null);
+  const curiosities = [
+    { component: <Pitstops key="pitstops-animation" activeCard={activeCard} setActiveCard={setActiveCard} />, id: "pitstops" },
+    { component: <Undercut key="undercut-animation" activeCard={activeCard} setActiveCard={setActiveCard} />, id: "undercut" },
+    { component: <DRS key="drs-animation" activeCard={activeCard} setActiveCard={setActiveCard} />, id: "drs" },
+  ];
 
   return (
     <div id="curiosities" className="p-4">
@@ -14,27 +21,11 @@ export default function Curiosities() {
         {curiosities.map((curiosity) => (
           <motion.div
             key={curiosity.id}
-            className={`bg-white p-4 rounded-lg shadow-md cursor-pointer ${activeCard === curiosity.id ? "col-span-full" : ""}`}
-            onClick={() => setActiveCard(activeCard === curiosity.id ? null : curiosity.id)}
+            className={`bg-white rounded-lg shadow-md ${activeCard === curiosity.id ? "col-span-full" : ""}`}
             layout
             transition={{ duration: 0.5, type: "spring" }}
           >
-            <div className="flex items-center mb-2">
-              {curiosity.icon}
-              <h3 className="text-lg font-semibold ml-2">{curiosity.title}</h3>
-            </div>
-            <AnimatePresence>
-              {activeCard === curiosity.id && (
-                <motion.div
-                  initial={{ opacity: 0, height: 0 }}
-                  animate={{ opacity: 1, height: "auto" }}
-                  exit={{ opacity: 0, height: 0 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  {curiosity.content}
-                </motion.div>
-              )}
-            </AnimatePresence>
+            {curiosity.component}
           </motion.div>
         ))}
       </div>
