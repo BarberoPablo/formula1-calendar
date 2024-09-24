@@ -1,5 +1,6 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { Lightbulb } from "lucide-react";
+import { useEffect, useState } from "react";
 
 const animationDuration = 10;
 const animationDelay = 3;
@@ -7,6 +8,34 @@ const animationDelay = 3;
 const curiosityId = "drs";
 
 export default function DRS({ activeCard, setActiveCard }: { activeCard: string | null; setActiveCard: (activeCard: string | null) => void }) {
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsSmallScreen(window.innerWidth < 768);
+    };
+
+    handleResize(); // Initial check
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize); // Cleanup
+  }, []);
+
+  const animation = {
+    /* small screen: 214x464 */
+    /* big screen:   564x264 */
+    blueCar: {
+      x: isSmallScreen ? [214 / 2, 0, 0, 214, 214, 214 / 2] : [564 / 2, 0, 0, 564, 564, 564 / 2],
+      y: isSmallScreen ? [464, 464, 0, 0, 464, 464] : [264, 264, 0, 0, 264, 264],
+      times: [0, 0.085, 0.425, 0.575, 0.915, 1],
+    },
+    redCar: {
+      x: isSmallScreen ? [214 / 3, 0, 0, 214, 214, 214 / 3] : [564 / 3, 0, 0, 564, 564, 564 / 3],
+      y: isSmallScreen ? [464, 464, 0, 0, 464, 464] : [264, 264, 0, 0, 264, 264],
+      times: [0, 0.113, 0.453, 0.623, 0.963, 1.19],
+    },
+  };
+
   return (
     <>
       <button className="flex items-center p-4 w-full" onClick={() => setActiveCard(activeCard === curiosityId ? null : curiosityId)}>
@@ -39,19 +68,14 @@ export default function DRS({ activeCard, setActiveCard }: { activeCard: string 
               </p>
               <div className="flex">
                 <div
-                  className="relative flex items-center justify-center m-auto lg:w-[600px] lg:h-[300px] rounded-lg border-2 border-gray-900 bg-gray-400"
+                  className="relative flex items-center justify-center m-auto w-[250px] h-[500px] md:w-[600px] md:h-[300px] rounded-lg border-2 border-gray-900 bg-gray-400"
                   style={{ background: "linear-gradient(to top, #9CA3AF 60%, #d9f99d 80%)" }}
                 >
+                  <div className="absolute md:top-[192px] md:left-[260px] w-20 h-10 bg-gray-800 z-10 p-2 text-gray-100 font-semibold">PIT STOP</div>
+                  <div className="absolute top-[236px] w-[170px] md:top-[202px] md:w-[520px] h-6 z-0 bg-gray-200 text-gray-100" />
+                  <div className="w-[170px] h-[420px] md:w-[520px] md:h-[220px] rounded-lg bg-gray-50 p-2" />
                   <div
-                    className="absolute top-[192px] left-[260px] w-20 h-10 bg-gray-800 z-10 p-2 text-gray-100 font-semibold"
-                    style={{ transform: `rotate(90deg)` }}
-                  >
-                    PIT STOP
-                  </div>
-                  <div className="absolute top-[202px] w-[520px] h-6 z-0 bg-gray-200 text-gray-100" />
-                  <div className="w-[520px] h-[220px] rounded-lg bg-gray-50 p-2" />
-                  <div
-                    className="absolute top-[264px] left-[364px] w-20 h-4 z-10 bg-gray-800 p-2 text-gray-100 font-semibold"
+                    className="absolute top-[470px] left-[125px] md:top-[264px] md:left-[364px] w-20 h-4 z-10 bg-gray-800 p-2 text-gray-100 font-semibold"
                     style={{
                       backgroundImage: "url(https://t4.ftcdn.net/jpg/05/79/75/39/360_F_579753941_lRNgw6HD8ouKHmam2HYTMW1b0zTCaMng.jpg)",
                       backgroundSize: "cover",
@@ -63,10 +87,7 @@ export default function DRS({ activeCard, setActiveCard }: { activeCard: string 
                   {/* Blue car animation with DRS */}
                   <motion.div
                     className="absolute left-0 top-0 z-50 w-8 h-8 bg-blue-500 rounded-full"
-                    animate={{
-                      x: [564 / 2, 0, 0, 564, 564, 564 / 2],
-                      y: [264, 264, 0, 0, 264, 264],
-                    }}
+                    animate={animation.blueCar}
                     transition={{
                       duration: animationDuration,
                       ease: "linear",
@@ -96,10 +117,7 @@ export default function DRS({ activeCard, setActiveCard }: { activeCard: string 
                   {/* Red car animation for pit stop later */}
                   <motion.div
                     className="absolute left-0 top-0 z-50 w-8 h-8 bg-red-500 rounded-full"
-                    animate={{
-                      x: [564 / 3, 0, 0, 564, 564, 564 / 3],
-                      y: [264, 264, 0, 0, 264, 264],
-                    }}
+                    animate={animation.redCar}
                     transition={{
                       duration: animationDuration,
                       ease: "linear",
