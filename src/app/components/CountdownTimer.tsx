@@ -88,7 +88,7 @@ export default function CountdownTimer({ nextRace }: { nextRace: Race }) {
           <div className="absolute z-0 w-full h-full">
             <Image src={watch.base} width={90} height={90} alt="watch base" />
           </div>
-          <div className="absolute z-10 w-full h-full transform origin-center transition-transform duration-1000">
+          <div className="absolute z-10 w-full h-full transform origin-center">
             <Image
               src={watch.hours}
               priority
@@ -98,16 +98,10 @@ export default function CountdownTimer({ nextRace }: { nextRace: Race }) {
               style={{ transform: `rotate(${currentTime.hrs * 30 + currentTime.mins / 2}deg)` }}
             />
           </div>
-          <div
-            className="absolute z-20 w-full h-full transform origin-center transition-transform duration-1000"
-            style={{ transform: `rotate(${currentTime.mins * 6}deg)` }}
-          >
+          <div className="absolute z-20 w-full h-full transform origin-center" style={{ transform: `rotate(${currentTime.mins * 6}deg)` }}>
             <Image src={watch.minutes} priority width={90} height={90} alt="watch minutes" />
           </div>
-          <div
-            className="absolute z-30 w-full h-full transform origin-center transition-transform duration-1000 ease-linear"
-            style={{ transform: `rotate(${currentTime.secs * 6}deg)` }}
-          >
+          <div className="absolute z-30 w-full h-full transform origin-center" style={{ transform: `rotate(${(currentTime.secs + 1) * 6}deg)` }}>
             <Image src={watch.seconds} width={90} height={90} alt="watch seconds" />
           </div>
         </a>

@@ -1,7 +1,7 @@
 import { teamColors } from "@/app/lib/constants";
 import type { DriversStandingsAPI, TeamsStandingsAPI } from "@/app/lib/types";
 import { useRacesStore } from "@/app/stores/racesStore";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { Bar, BarChart, Cell, Tooltip, XAxis, YAxis } from "recharts"; // Asegúrate de importar correctamente
 import { Payload } from "recharts/types/component/DefaultTooltipContent";
 
