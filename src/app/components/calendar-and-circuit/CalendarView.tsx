@@ -64,8 +64,6 @@ export default function CalendarView({ races, onRaceClick }: { races: Race[]; on
 
   return (
     <motion.div id="schedule" key={"schedule-section"} initial={{ opacity: 0, x: 300 }} animate={{ opacity: 1, x: 0 }} className="lg:p-4">
-      {/* <div id="schedule" className="lg:p-4"> */}
-      <h2 className="text-2xl font-bold mb-4 text-[#e10600]">2024 F1 Schedule & Results</h2>
       <div className="m-auto w-72 lg:w-80 bg-white p-4 rounded-lg shadow-md">
         <div className="flex justify-between items-center mb-4">
           <button onClick={handlePrevMonth} className="p-2 rounded-full hover:bg-gray-200">
@@ -87,7 +85,6 @@ export default function CalendarView({ races, onRaceClick }: { races: Race[]; on
         </div>
         <div className="grid grid-cols-7 gap-2">{renderCalendar()}</div>
       </div>
-      {/* </div> */}
     </motion.div>
   );
 }

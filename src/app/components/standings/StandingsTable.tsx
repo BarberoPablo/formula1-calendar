@@ -13,8 +13,7 @@ export default function StandingsTable({ showDrivers, setShowDrivers }: { showDr
   }
 
   return (
-    <div id="standings" className="p-4">
-      <h2 className="text-2xl font-bold mb-4 text-[#e10600]">Standings</h2>
+    <div id="standings">
       <div className="flex justify-center space-x-4 mb-4">
         <button className={`px-4 py-2 rounded-md ${showDrivers ? "bg-[#e10600] text-white" : "bg-gray-200"}`} onClick={() => setShowDrivers(true)}>
           Driver Standings

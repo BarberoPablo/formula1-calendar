@@ -46,14 +46,17 @@ export default function CalendarAndCircuit({ races }: { races: Race[] }) {
   };
 
   return (
-    <div className="p-4 flex flex-col lg:flex-row justify-center">
-      <CalendarView races={races} onRaceClick={handleRaceClick} />
-      <div id="race-info">
-        {showCircuitDetails ? (
-          <CircuitView selectedRace={selectedRace} hideCircuit={handleHideCircuitView} />
-        ) : (
-          <RaceResults raceResult={raceResult} hideRaceResults={handleHideRaceResults} />
-        )}
+    <div className="p-4 flex flex-col">
+      <h2 className="self-start text-2xl font-bold mb-4 text-[#e10600]">2024 F1 Schedule & Results</h2>
+      <div className="flex flex-col lg:flex-row justify-center">
+        <CalendarView races={races} onRaceClick={handleRaceClick} />
+        <div id="race-info">
+          {showCircuitDetails ? (
+            <CircuitView selectedRace={selectedRace} hideCircuit={handleHideCircuitView} />
+          ) : (
+            <RaceResults raceResult={raceResult} hideRaceResults={handleHideRaceResults} />
+          )}
+        </div>
       </div>
     </div>
   );
