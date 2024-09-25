@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, ChevronUp, Flag, Calendar, Trophy, Clock } from "lucide-react";
 import Image from "next/image";
@@ -10,10 +10,20 @@ import { driversInformation } from "../lib/constants";
 export default function RaceResults({ raceResult }: { raceResult: RaceResultAPI[] }) {
   const [expandedDriver, setExpandedDriver] = useState<string | null>(null);
   const podium = [raceResult[1], raceResult[0], raceResult[2]];
+  const raceResults = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (raceResults.current) {
+      raceResults.current.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    }
+  }, [raceResult]);
 
   if (raceResult.length === 0) {
     return (
-      <div className="flex justify-center items-center h-32">
+      <div className="flex justify-center items-center h-32 lg:h-[526px]">
         <h2 className="text-3xl font-bold mb-6 text-[#e10600]">No race results available</h2>
       </div>
     );
@@ -22,6 +32,7 @@ export default function RaceResults({ raceResult }: { raceResult: RaceResultAPI[
   return (
     <AnimatePresence>
       <motion.div
+        ref={raceResults}
         id="race-info"
         key={"race-results"}
         initial={{ opacity: 0, x: 300 }}
