@@ -1,6 +1,6 @@
 "use client";
 
-import { teamColors } from "@/app/lib/constants";
+import { constructorsInformation } from "@/app/lib/constants";
 import type { DriversStandingsAPI, TeamsStandingsAPI } from "@/app/lib/types";
 import { useRacesStore } from "@/app/stores/racesStore";
 import { AnimatePresence, motion } from "framer-motion";
@@ -56,7 +56,7 @@ function DriversTableBody(driversStandings: DriversStandingsAPI[]) {
     <tr
       key={driverStanding.Driver.driverId}
       className={`border-b border-gray-200 hover:bg-gray-100 ${index % 2 && "bg-gray-50"} border-l-4`}
-      style={{ borderLeftColor: teamColors[driverStanding.Constructors[driverStanding.Constructors.length - 1].constructorId][0] }}
+      style={{ borderLeftColor: constructorsInformation[driverStanding.Constructors[driverStanding.Constructors.length - 1].constructorId]?.colors[0] }}
     >
       <td className="h-full py-3 px-6 flex justify-center">{index + 1}</td>
       <td className="h-full py-3 px-6 text-left">{driverStanding.Driver.givenName + " " + driverStanding.Driver.familyName}</td>
@@ -71,7 +71,7 @@ function TeamsTableBody(teamsStandings: TeamsStandingsAPI[]) {
     <tr
       key={team.Constructor.constructorId}
       className={`border-b border-gray-200 hover:bg-gray-100 ${index % 2 && "bg-gray-50"} border-l-4`}
-      style={{ borderLeftColor: teamColors[team.Constructor.constructorId][0] }}
+      style={{ borderLeftColor: constructorsInformation[team.Constructor.constructorId]?.colors[0] }}
     >
       <td className="h-full py-3 px-6 flex justify-center">{index + 1}</td>
       <td className="h-full py-3 px-6 text-left">{team.Constructor.name}</td>

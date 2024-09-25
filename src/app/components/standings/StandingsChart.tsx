@@ -1,7 +1,7 @@
-import { teamColors } from "@/app/lib/constants";
+import { constructorsInformation } from "@/app/lib/constants";
 import type { DriversStandingsAPI, TeamsStandingsAPI } from "@/app/lib/types";
 import { useRacesStore } from "@/app/stores/racesStore";
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Bar, BarChart, Cell, Tooltip, XAxis, YAxis } from "recharts"; // Asegúrate de importar correctamente
 import { Payload } from "recharts/types/component/DefaultTooltipContent";
 
@@ -58,7 +58,7 @@ function DriversChart(driversStandings: DriversStandingsAPI[]) {
       </Bar>
       <defs>
         {driversStandings.map((standing, index) => {
-          const colors = teamColors[standing.Constructors?.[standing.Constructors.length - 1].constructorId] || ["#e10600"];
+          const colors = constructorsInformation[standing.Constructors?.[standing.Constructors.length - 1].constructorId]?.colors || ["#e10600"];
           return (
             <linearGradient key={`gradient-${index}`} id={`gradient-${index}`} x1="0" y1="0" x2="0" y2="1">
               {colors.map((color, colorIndex) => (
@@ -83,7 +83,7 @@ function TeamsChart(teamsStandings: TeamsStandingsAPI[]) {
       </Bar>
       <defs>
         {teamsStandings.map((standing, index) => {
-          const colors = teamColors[(standing as TeamsStandingsAPI).Constructor?.constructorId] || ["#e10600"];
+          const colors = constructorsInformation[(standing as TeamsStandingsAPI).Constructor?.constructorId]?.colors || ["#e10600"];
 
           return (
             <linearGradient key={`gradient-${index}`} id={`gradient-${index}`} x1="0" y1="0" x2="0" y2="1">

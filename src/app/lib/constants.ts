@@ -4,17 +4,17 @@ export const totalRaces = 24;
 
 export const apiYear = "2024";
 
-export const teamColors: { [key in TeamId]: string[] } = {
-  red_bull: ["#0600EF", "#FF0000"],
-  mercedes: ["#00D2BE"],
-  ferrari: ["#DC0000"],
-  mclaren: ["#FF8700"],
-  aston_martin: ["#006F62"],
-  alpine: ["#0090FF"],
-  rb: ["#2B4562"],
-  sauber: ["#00B140"], //#0FD11C
-  haas: ["#FF0000", "#FFFFFF"],
-  williams: ["#005AFF"],
+export const constructorsInformation: { [key in TeamId]: { colors: string[]; image: string } } = {
+  red_bull: { colors: ["#0600EF", "#FF0000"], image: "https://media.formula1.com/content/dam/fom-website/teams/2024/red-bull-racing-logo.png" },
+  mercedes: { colors: ["#00D2BE"], image: "https://media.formula1.com/content/dam/fom-website/teams/2024/mercedes-logo.png" },
+  ferrari: { colors: ["#DC0000"], image: "https://media.formula1.com/content/dam/fom-website/teams/2024/ferrari-logo.png" },
+  mclaren: { colors: ["#FF8700"], image: "https://media.formula1.com/content/dam/fom-website/teams/2024/mclaren-logo.png" },
+  aston_martin: { colors: ["#006F62"], image: "https://media.formula1.com/content/dam/fom-website/teams/2024/aston-martin-logo.png" },
+  alpine: { colors: ["#0090FF"], image: "https://media.formula1.com/content/dam/fom-website/teams/2024/alpine-logo.png" },
+  rb: { colors: ["#2B4562"], image: "https://media.formula1.com/content/dam/fom-website/teams/2024/rb-logo.png" },
+  sauber: { colors: ["#00B140"], image: "https://media.formula1.com/content/dam/fom-website/teams/2024/kick-sauber-logo.png" },
+  haas: { colors: ["#FF0000", "#FFFFFF"], image: "https://media.formula1.com/content/dam/fom-website/teams/2024/haas-logo.png" },
+  williams: { colors: ["#005AFF"], image: "https://media.formula1.com/content/dam/fom-website/teams/2024/williams-logo.png" },
 };
 
 export const yearImage = "https://media.formula1.com/content/dam/fom-website/2018-redesign-assets/year%20icon/2024.png";
