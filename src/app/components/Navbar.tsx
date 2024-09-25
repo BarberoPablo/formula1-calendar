@@ -64,7 +64,12 @@ export default function Navbar() {
         <motion.div initial={{ opacity: 0, y: -50 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -50 }} className="md:hidden">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
             {navItems.map((item) => (
-              <a key={item.name} href={item.href} className="block px-3 py-2 rounded-md text-base font-medium hover:bg-[#ff0000] hover:text-white">
+              <a
+                key={item.name}
+                href={item.href}
+                onClick={() => setIsOpen(false)}
+                className="block px-3 py-2 rounded-md text-base font-medium hover:bg-[#ff0000] hover:text-white"
+              >
                 {item.name}
               </a>
             ))}
