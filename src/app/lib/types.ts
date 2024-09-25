@@ -57,6 +57,68 @@ export type Race = {
   };
 };
 
+type Driver = {
+  driverId: DriverId;
+  permanentNumber: string;
+  code: string;
+  url: string;
+  givenName: string;
+  familyName: string;
+  dateOfBirth: string;
+  nationality: string;
+};
+
+type Constructor = {
+  constructorId: TeamId;
+  url: string;
+  name: TeamId;
+  nationality: string;
+};
+
+export type DriversStandingsAPI = {
+  position: string;
+  positionText: string;
+  points: string;
+  wins: string;
+  Driver: Driver;
+  Constructors: Constructor[];
+};
+
+export type TeamsStandingsAPI = {
+  position: string;
+  positionText: string;
+  points: string;
+  wins: string;
+  Constructor: Constructor;
+};
+
+export type RaceResultAPI = {
+  number: string;
+  position: string;
+  positionText: string;
+  points: string;
+  Driver: Driver;
+  Constructor: Constructor;
+  grid: string;
+  laps: string;
+  status: string;
+  Time: {
+    millis: string;
+    time: string;
+  };
+  FastestLap: {
+    rank: string;
+    lap: string;
+    Time: {
+      time: string;
+    };
+    AverageSpeed: {
+      units: string;
+      speed: string;
+    };
+  };
+};
+
 export type CircuitId =
   | "albert_park"
   | "americas"
@@ -83,40 +145,24 @@ export type CircuitId =
   | "yas_marina"
   | "zandvoort";
 
-export type DriversStandingsAPI = {
-  position: string;
-  positionText: string;
-  points: string;
-  wins: string;
-  Driver: {
-    driverId: string;
-    permanentNumber: string;
-    code: string;
-    url: string;
-    givenName: string;
-    familyName: string;
-    dateOfBirth: string;
-    nationality: string;
-  };
-  Constructors: [
-    {
-      constructorId: TeamId;
-      url: string;
-      name: TeamId;
-      nationality: string;
-    }
-  ];
-};
-
-export type TeamsStandingsAPI = {
-  position: string;
-  positionText: string;
-  points: string;
-  wins: string;
-  Constructor: {
-    constructorId: TeamId;
-    url: string;
-    name: string;
-    nationality: string;
-  };
-};
+export type DriverId =
+  | "norris"
+  | "piastri"
+  | "max_verstappen"
+  | "perez"
+  | "russell"
+  | "hamilton"
+  | "leclerc"
+  | "sainz"
+  | "alonso"
+  | "stroll"
+  | "hulkenberg"
+  | "kevin_magnussen"
+  | "colapinto"
+  | "albon"
+  | "tsunoda"
+  | "ricciardo"
+  | "ocon"
+  | "gasly"
+  | "zhou"
+  | "bottas";

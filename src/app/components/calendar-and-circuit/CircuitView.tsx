@@ -4,7 +4,7 @@ import { getSessions } from "@/app/lib/utils";
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 
-export default function CircuitView({ selectedRace }: { selectedRace: Race | null }) {
+export default function CircuitView({ selectedRace, hideCircuit }: { selectedRace: Race | null; hideCircuit: () => void }) {
   return (
     <AnimatePresence>
       {selectedRace && (
@@ -28,8 +28,11 @@ export default function CircuitView({ selectedRace }: { selectedRace: Race | nul
             <h2 className="lg:mx-5 text-2xl text-black font-bold">{selectedRace.Circuit.circuitName}</h2>
           </div>
 
-          <div>
+          <div className="flex flex-col items-center space-y-10">
             <Image src={circuitsImages[selectedRace.Circuit.circuitId].circuit} alt="Circuit map" width={732} height={412} />
+            <button className={`px-4 py-2 rounded-md bg-[#e10600] text-white font-bold`} onClick={hideCircuit}>
+              SEE RACE RESULTS
+            </button>
           </div>
 
           <div className="flex flex-col w-full lg:max-w-[500px]">

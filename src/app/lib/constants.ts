@@ -1,4 +1,4 @@
-import { CircuitId, TeamId } from "./types";
+import { CircuitId, DriverId, TeamId } from "./types";
 
 export const totalRaces = 24;
 
@@ -18,6 +18,35 @@ export const teamColors: { [key in TeamId]: string[] } = {
 };
 
 export const yearImage = "https://media.formula1.com/content/dam/fom-website/2018-redesign-assets/year%20icon/2024.png";
+
+export const driversInformation: { [key in DriverId]: { profileImage: string } } = {
+  norris: { profileImage: "https://media.formula1.com/image/upload/f_auto,c_limit,q_75,w_1320/content/dam/fom-website/drivers/2024Drivers/norris" },
+  piastri: { profileImage: "https://media.formula1.com/image/upload/f_auto,c_limit,q_75,w_1320/content/dam/fom-website/drivers/2024Drivers/piastri" },
+  max_verstappen: {
+    profileImage: "https://media.formula1.com/image/upload/f_auto,c_limit,q_75,w_1320/content/dam/fom-website/drivers/2024Drivers/verstappen",
+  },
+  perez: { profileImage: "https://media.formula1.com/image/upload/f_auto,c_limit,q_75,w_1320/content/dam/fom-website/drivers/2024Drivers/perez" },
+  russell: { profileImage: "https://media.formula1.com/image/upload/f_auto,c_limit,q_75,w_1320/content/dam/fom-website/drivers/2024Drivers/russell" },
+  hamilton: { profileImage: "https://media.formula1.com/image/upload/f_auto,c_limit,q_75,w_1320/content/dam/fom-website/drivers/2024Drivers/hamilton" },
+  leclerc: { profileImage: "https://media.formula1.com/image/upload/f_auto,c_limit,q_75,w_1320/content/dam/fom-website/drivers/2024Drivers/leclerc" },
+  sainz: { profileImage: "https://media.formula1.com/image/upload/f_auto,c_limit,q_75,w_1320/content/dam/fom-website/drivers/2024Drivers/sainz" },
+  alonso: { profileImage: "https://media.formula1.com/image/upload/f_auto,c_limit,q_75,w_1320/content/dam/fom-website/drivers/2024Drivers/alonso" },
+  stroll: { profileImage: "https://media.formula1.com/image/upload/f_auto,c_limit,q_75,w_1320/content/dam/fom-website/drivers/2024Drivers/stroll" },
+  hulkenberg: {
+    profileImage: "https://media.formula1.com/image/upload/f_auto,c_limit,q_75,w_1320/content/dam/fom-website/drivers/2024Drivers/hulkenberg",
+  },
+  kevin_magnussen: {
+    profileImage: "https://media.formula1.com/image/upload/f_auto,c_limit,q_75,w_1320/content/dam/fom-website/drivers/2024Drivers/magnussen",
+  },
+  colapinto: { profileImage: "https://media.formula1.com/image/upload/f_auto,c_limit,q_75,w_1320/content/dam/fom-website/drivers/2024Drivers/colapinto" },
+  albon: { profileImage: "https://media.formula1.com/image/upload/f_auto,c_limit,q_75,w_1320/content/dam/fom-website/drivers/2024Drivers/albon" },
+  tsunoda: { profileImage: "https://media.formula1.com/image/upload/f_auto,c_limit,q_75,w_1320/content/dam/fom-website/drivers/2024Drivers/tsunoda" },
+  ricciardo: { profileImage: "https://media.formula1.com/image/upload/f_auto,c_limit,q_75,w_1320/content/dam/fom-website/drivers/2024Drivers/ricciardo" },
+  ocon: { profileImage: "https://media.formula1.com/image/upload/f_auto,c_limit,q_75,w_1320/content/dam/fom-website/drivers/2024Drivers/ocon" },
+  gasly: { profileImage: "https://media.formula1.com/image/upload/f_auto,c_limit,q_75,w_1320/content/dam/fom-website/drivers/2024Drivers/gasly" },
+  zhou: { profileImage: "https://media.formula1.com/image/upload/f_auto,c_limit,q_75,w_1320/content/dam/fom-website/drivers/2024Drivers/zhou" },
+  bottas: { profileImage: "https://media.formula1.com/image/upload/f_auto,c_limit,q_75,w_1320/content/dam/fom-website/drivers/2024Drivers/bottas" },
+};
 
 export const circuitsImages: { [key in CircuitId]: { banner: string; circuit: string; flag: string; laps: number; circuitLength: number } } = {
   albert_park: {

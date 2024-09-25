@@ -1,28 +1,46 @@
 "use client";
 
-import type { Race } from "@/app/lib/types";
-import { useState } from "react";
+import { f1Api } from "@/app/api/f1Api";
+import { apiYear } from "@/app/lib/constants";
+import type { Race, RaceResultAPI } from "@/app/lib/types";
+import { useEffect, useState } from "react";
+import RaceResults from "../RaceResults";
 import CalendarView from "./CalendarView";
 import CircuitView from "./CircuitView";
 
 export default function CalendarAndCircuit({ races }: { races: Race[] }) {
   const [selectedRace, setSelectedRace] = useState<Race | null>(null);
+  const [raceResult, setRaceResult] = useState<RaceResultAPI[] | []>([]);
+  const [showRaceResults, setShowRaceResults] = useState(false);
+
+  useEffect(() => {
+    const fetchRaceDetails = async () => {
+      if (selectedRace?.round) {
+        console.log("Fetching data for round: ", selectedRace.round);
+        try {
+          const result = await f1Api.getRaceDetails(apiYear, selectedRace.round);
+          setRaceResult(result);
+        } catch (error) {
+          console.error("Error fetching race details:", error);
+        }
+      }
+    };
+
+    fetchRaceDetails();
+  }, [selectedRace]);
 
   const handleRaceClick = (race: Race /* trackId: number */) => {
-    /* If day is different from race.day => its a qualy || practice || sprint 
-      show all data from that day, all that matches, if 2 practices matches, array and set a state with array of things to show
-    */
-    /* Separate and use Zustand to comunicate CalendarView with CircuitView */
     setSelectedRace(race);
+  };
 
-    /* CHANGE setCalendarSelectedDate FOR TRACK ID */
-    //setCalendarSelectedDate(date);
+  const handleHideCircuitView = () => {
+    setShowRaceResults((prev) => !prev);
   };
 
   return (
     <div className="p-4 flex flex-col lg:flex-row justify-center">
       <CalendarView races={races} onRaceClick={handleRaceClick} />
-      <CircuitView selectedRace={selectedRace} />
+      {showRaceResults ? <RaceResults raceResult={raceResult} /> : <CircuitView selectedRace={selectedRace} hideCircuit={handleHideCircuitView} />}
     </div>
   );
 }
