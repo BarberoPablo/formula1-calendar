@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronDown, ChevronUp, Flag, Calendar, Trophy } from "lucide-react";
+import { ChevronDown, ChevronUp, Flag, Calendar, Trophy, Clock } from "lucide-react";
 import Image from "next/image";
 import { RaceResultAPI } from "../lib/types";
 import { driversInformation } from "../lib/constants";
@@ -30,13 +30,15 @@ export default function RaceResults({ raceResult }: { raceResult: RaceResultAPI[
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.2 }}
             >
-              <Image
-                src={driversInformation[driver.Driver.driverId].profileImage}
-                alt={driver.Driver.givenName + "podium profile pic"}
-                width={120}
-                height={120}
-                className="rounded-full border-4 border-white shadow-lg mb-2"
-              />
+              <div className="w-[120px] h-[120px] overflow-hidden rounded-full border-4 border-white shadow-lg mb-2">
+                <Image
+                  src={driversInformation[driver.Driver.driverId].profileImage}
+                  alt={driver.Driver.givenName + "podium profile pic"}
+                  width={220}
+                  height={220}
+                  className="w-[220px] h-[220px] object-cover object-top"
+                />
+              </div>
               <div
                 className={`bg-gradient-to-b ${
                   index === 0
@@ -67,7 +69,7 @@ export default function RaceResults({ raceResult }: { raceResult: RaceResultAPI[
                   <span className="font-bold text-lg w-8">{driver.position}</span>
                   <div>
                     <p className="font-semibold">{driver.Driver.givenName + " " + driver.Driver.familyName}</p>
-                    <p className="text-sm text-gray-600">{driver.Constructor.name}</p>
+                    <p className="text-sm">{driver.Constructor.name}</p>
                   </div>
                 </div>
                 <div className="flex items-center space-x-4">
@@ -86,21 +88,27 @@ export default function RaceResults({ raceResult }: { raceResult: RaceResultAPI[
                     className="overflow-hidden"
                   >
                     <div className="p-4 bg-gray-50 flex items-center space-x-4">
-                      <Image
-                        src={driversInformation[driver.Driver.driverId].profileImage}
-                        alt={driver.Driver.givenName + "profile pic"}
-                        width={100}
-                        height={100}
-                        className="rounded-full"
-                      />
+                      <div className="w-[100px] h-[100px] overflow-hidden rounded-full border-4 border-white shadow-lg mb-2">
+                        <Image
+                          src={driversInformation[driver.Driver.driverId].profileImage}
+                          alt={driver.Driver.givenName + "podium profile pic"}
+                          width={180}
+                          height={180}
+                          className="w-[180px] h-[180px] object-cover object-top"
+                        />
+                      </div>
                       <div>
                         <p className="flex items-center space-x-2">
                           <Flag size={16} />
-                          <span>{driver.Driver.nationality}</span>
+                          <span>{driver.Driver?.nationality}</span>
                         </p>
                         <p className="flex items-center space-x-2">
                           <Calendar size={16} />
-                          <span>{driver.Driver.dateOfBirth}</span>
+                          <span>{driver.Driver?.dateOfBirth}</span>
+                        </p>
+                        <p className="flex items-center space-x-2">
+                          <Clock size={16} />
+                          <span>Time Difference: {driver.Time?.time || "Lapped"}</span>
                         </p>
                       </div>
                     </div>
