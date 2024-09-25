@@ -32,7 +32,7 @@ export default function StandingsTable({ showDrivers, setShowDrivers }: { showDr
           transition={{ duration: 0.3 }}
           className="flex flex-col justify-center md:flex-row"
         >
-          <div className="overflow-x-auto mb-8 h-[526px] overflow-y-auto">
+          <div className="overflow-x-auto mb-8 lg:h-[526px] overflow-y-auto">
             <table className="min-w-full bg-white">
               <thead>
                 <tr className="bg-gray-200 uppercase text-sm border-l-4 border-gray-200">
