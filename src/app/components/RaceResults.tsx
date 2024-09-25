@@ -1,13 +1,13 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { ChevronDown, ChevronUp, Flag, Calendar, Trophy, Clock } from "lucide-react";
+import { AnimatePresence, motion } from "framer-motion";
+import { Calendar, ChevronDown, ChevronUp, Clock, Flag, Trophy } from "lucide-react";
 import Image from "next/image";
-import { RaceResultAPI } from "../lib/types";
+import { useEffect, useRef, useState } from "react";
 import { driversInformation } from "../lib/constants";
+import { RaceResultAPI } from "../lib/types";
 
-export default function RaceResults({ raceResult }: { raceResult: RaceResultAPI[] }) {
+export default function RaceResults({ raceResult, hideRaceResults }: { raceResult: RaceResultAPI[]; hideRaceResults: () => void }) {
   const [expandedDriver, setExpandedDriver] = useState<string | null>(null);
   const podium = [raceResult[1], raceResult[0], raceResult[2]];
   const raceResults = useRef<HTMLDivElement>(null);
@@ -33,13 +33,18 @@ export default function RaceResults({ raceResult }: { raceResult: RaceResultAPI[
     <AnimatePresence>
       <motion.div
         ref={raceResults}
-        id="race-info"
         key={"race-results"}
         initial={{ opacity: 0, x: 300 }}
         animate={{ opacity: 1, x: 0 }}
         className="p-4 overflow-x-auto mb-8 lg:h-[526px] overflow-y-auto"
       >
-        <h2 className="text-3xl font-bold mb-6 text-[#e10600]">Race Results</h2>
+        <div className="flex flex-col items-baseline space-x-2">
+          <h2 className="text-3xl font-bold text-[#e10600]">Race Results</h2>
+          <button className="flex flex-row justify-center items-center h-full p-1 rounded-xl" onClick={hideRaceResults}>
+            <h3 className="text-1xl text-[#e10600]">(Back to circuit details)</h3>
+          </button>
+        </div>
+
         <div className="flex justify-center items-end mb-12 sm:space-x-4">
           {podium.map((driver, index) => (
             <motion.div
@@ -136,6 +141,9 @@ export default function RaceResults({ raceResult }: { raceResult: RaceResultAPI[
               </AnimatePresence>
             </motion.div>
           ))}
+          <button className="block md:hidden m-auto" onClick={hideRaceResults}>
+            <h3 className="text-1xl text-[#e10600]">(Back to circuit details)</h3>
+          </button>
         </div>
       </motion.div>
     </AnimatePresence>

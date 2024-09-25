@@ -9,7 +9,6 @@ export default function CircuitView({ selectedRace, hideCircuit }: { selectedRac
     <AnimatePresence>
       {selectedRace && (
         <motion.div
-          id="race-info"
           key={selectedRace.raceName}
           initial={{ opacity: 0, x: 300 }}
           animate={{ opacity: 1, x: 0 }}
