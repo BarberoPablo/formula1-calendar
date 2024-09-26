@@ -23,8 +23,11 @@ export default function RaceResults({ raceResult, hideRaceResults }: { raceResul
 
   if (raceResult.length === 0) {
     return (
-      <div className="flex justify-center items-center h-32 lg:h-[526px]">
+      <div className="flex flex-col justify-center lg:justify-start lg:mt-10 items-center h-32 lg:h-[526px]">
         <h2 className="text-3xl font-bold mb-6 text-[#e10600]">No race results available</h2>
+        <button className="flex flex-row justify-center items-center p-1 rounded-xl" onClick={hideRaceResults}>
+          <h3 className="text-1xl text-[#e10600]">(Back to circuit details)</h3>
+        </button>
       </div>
     );
   }
