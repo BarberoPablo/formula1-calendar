@@ -1,5 +1,3 @@
-export type TeamId = "red_bull" | "mercedes" | "ferrari" | "mclaren" | "aston_martin" | "alpine" | "rb" | "sauber" | "haas" | "williams";
-
 export type Session = {
   circuit_key: number;
   circuit_short_name: string;
@@ -118,6 +116,8 @@ export type RaceResultAPI = {
     };
   };
 };
+
+export type TeamId = "red_bull" | "mercedes" | "ferrari" | "mclaren" | "aston_martin" | "alpine" | "rb" | "sauber" | "haas" | "williams";
 
 export type CircuitId =
   | "albert_park"

@@ -15,12 +15,18 @@ const times = {
   redTime: (1.2455 * animationDuration).toFixed(3) + "sec",
 };
 
-const curiosityId = "undercut";
-
 const tableHead = ["Old tires", "New tires", "Pit stop time", "Pit entrance/exit time", "Blue time", "Red time"];
 const tableBody = [times.oldTyresLap, times.newTyresLap, times.pitStop, times.pitExit, times.blueTime, times.redTime];
 
-export default function Undercut({ activeCard, setActiveCard }: { activeCard: string | null; setActiveCard: (activeCard: string | null) => void }) {
+export default function Undercut({
+  activeCard,
+  curiosityId,
+  setActiveCard,
+}: {
+  activeCard: string | null;
+  curiosityId: string;
+  setActiveCard: (activeCard: string | null) => void;
+}) {
   const [isSmallScreen, setIsSmallScreen] = useState(false);
 
   useEffect(() => {

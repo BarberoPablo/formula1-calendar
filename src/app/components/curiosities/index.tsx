@@ -5,13 +5,18 @@ import { useState } from "react";
 import Pitstops from "./Pitstops";
 import Undercut from "./Undercut";
 import DRS from "./Drs";
+import LightsReactionTime from "./LightsReactionTime";
 
 export default function Curiosities() {
   const [activeCard, setActiveCard] = useState<string | null>(null);
   const curiosities = [
-    { component: <Pitstops key="pitstops-animation" activeCard={activeCard} setActiveCard={setActiveCard} />, id: "pitstops" },
-    { component: <Undercut key="undercut-animation" activeCard={activeCard} setActiveCard={setActiveCard} />, id: "undercut" },
-    { component: <DRS key="drs-animation" activeCard={activeCard} setActiveCard={setActiveCard} />, id: "drs" },
+    { component: <Pitstops key="pitstops-animation" activeCard={activeCard} curiosityId="pitstops" setActiveCard={setActiveCard} />, id: "pitstops" },
+    { component: <Undercut key="undercut-animation" activeCard={activeCard} curiosityId="undercut" setActiveCard={setActiveCard} />, id: "undercut" },
+    { component: <DRS key="drs-animation" activeCard={activeCard} setActiveCard={setActiveCard} curiosityId="drs" />, id: "drs" },
+    {
+      component: <LightsReactionTime key="lights-reaction" activeCard={activeCard} setActiveCard={setActiveCard} curiosityId="lights-game" />,
+      id: "lights-game",
+    },
   ];
 
   return (

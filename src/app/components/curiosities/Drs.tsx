@@ -5,9 +5,15 @@ import { useEffect, useState } from "react";
 const animationDuration = 10;
 const animationDelay = 3;
 
-const curiosityId = "drs";
-
-export default function DRS({ activeCard, setActiveCard }: { activeCard: string | null; setActiveCard: (activeCard: string | null) => void }) {
+export default function DRS({
+  activeCard,
+  curiosityId,
+  setActiveCard,
+}: {
+  activeCard: string | null;
+  curiosityId: string;
+  setActiveCard: (activeCard: string | null) => void;
+}) {
   const [isSmallScreen, setIsSmallScreen] = useState(false);
 
   useEffect(() => {

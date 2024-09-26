@@ -1,9 +1,15 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { Clock } from "lucide-react";
 
-const curiosityId = "pitstops";
-
-export default function Pitstops({ activeCard, setActiveCard }: { activeCard: string | null; setActiveCard: (activeCard: string | null) => void }) {
+export default function Pitstops({
+  activeCard,
+  curiosityId,
+  setActiveCard,
+}: {
+  activeCard: string | null;
+  curiosityId: string;
+  setActiveCard: (activeCard: string | null) => void;
+}) {
   return (
     <>
       <button className="flex items-center p-4 w-full" onClick={() => setActiveCard(activeCard === curiosityId ? null : curiosityId)}>
