@@ -21,7 +21,7 @@ export default function LightsReactionTime({
   const [gameState, setGameState] = useState<"ready" | "starting" | "waiting" | "finished">("ready");
   const [startTime, setStartTime] = useState<number | null>(null);
   const [reactionTime, setReactionTime] = useState<number | null>(null);
-  const [bestTime, setBestTime] = useState<number | null>(Number(localStorage.getItem("f1BestTime")) || null); //local storage
+  const [bestTime, setBestTime] = useState<number | null>(Number(window.localStorage.getItem("f1BestTime")) || null); //local storage
   const timeoutsRef = useRef<NodeJS.Timeout[]>([]);
 
   const updateBestTime = useCallback(
