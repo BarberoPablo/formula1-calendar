@@ -21,8 +21,23 @@ export default function LightsReactionTime({
   const [gameState, setGameState] = useState<"ready" | "starting" | "waiting" | "finished">("ready");
   const [startTime, setStartTime] = useState<number | null>(null);
   const [reactionTime, setReactionTime] = useState<number | null>(null);
-  const [bestTime, setBestTime] = useState<number | null>(Number(window.localStorage.getItem("f1BestTime")) || null); //local storage
+  const [bestTime, setBestTime] = useState<number | null>(null);
   const timeoutsRef = useRef<NodeJS.Timeout[]>([]);
+
+  /* I have to use localStorage inside an useEffect to be able to deploy to Vercel (in SSR localStorage is not available) */
+  useEffect(() => {
+    const storedBestTime = localStorage.getItem("f1BestTime");
+    if (storedBestTime) {
+      setBestTime(parseInt(storedBestTime));
+    }
+  }, []);
+
+  useEffect(() => {
+    // If false start => stop game
+    if (reactionTime === -1) {
+      clearAllTimeouts();
+    }
+  }, [reactionTime]);
 
   const updateBestTime = useCallback(
     (time: number) => {
@@ -38,13 +53,6 @@ export default function LightsReactionTime({
     timeoutsRef.current.forEach(clearTimeout);
     timeoutsRef.current = [];
   };
-
-  useEffect(() => {
-    // If false start => stop game
-    if (reactionTime === -1) {
-      clearAllTimeouts();
-    }
-  }, [reactionTime]);
 
   const startGame = useCallback(() => {
     setGameState("starting");
