@@ -1,7 +1,7 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
-import { Calendar, ChevronDown, ChevronUp, Clock, Flag, Trophy } from "lucide-react";
+import { ChevronDown, ChevronUp, Clock, Gauge, Trophy, Zap } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { driversInformation } from "../lib/constants";
@@ -86,7 +86,7 @@ export default function RaceResults({ raceResult, hideRaceResults }: { raceResul
         </div>
 
         <div className="space-y-2">
-          {raceResult.map((driver) => (
+          {raceResult.map((driver, index) => (
             <motion.div key={driver.position} className="bg-white shadow-md rounded-lg overflow-hidden" initial={false}>
               <div
                 className="flex items-center justify-between p-4 cursor-pointer"
@@ -107,13 +107,7 @@ export default function RaceResults({ raceResult, hideRaceResults }: { raceResul
               </div>
               <AnimatePresence>
                 {expandedDriver === driver.position && (
-                  <motion.div
-                    initial={{ height: 0 }}
-                    animate={{ height: "auto" }}
-                    exit={{ height: 0 }}
-                    transition={{ duration: 0.3 }}
-                    className="overflow-hidden"
-                  >
+                  <motion.div initial={{ height: 0 }} animate={{ height: "auto" }} exit={{ height: 0 }} transition={{ duration: 0.3 }}>
                     <div className="p-4 bg-gray-50 flex items-center space-x-4">
                       <div className="w-[100px] h-[100px] overflow-hidden rounded-full border-4 border-white shadow-lg mb-2">
                         <Image
@@ -125,17 +119,27 @@ export default function RaceResults({ raceResult, hideRaceResults }: { raceResul
                         />
                       </div>
                       <div>
-                        <p className="flex items-center space-x-2">
-                          <Flag size={16} />
-                          <span>{driver.Driver?.nationality}</span>
-                        </p>
-                        <p className="flex items-center space-x-2">
-                          <Calendar size={16} />
-                          <span>{driver.Driver?.dateOfBirth}</span>
-                        </p>
-                        <p className="flex items-center space-x-2">
+                        <p className="flex items-center space-x-2 border-b-2 border-gray-100 pb-2">
                           <Clock size={16} />
-                          <span>Time Difference: {driver.Time?.time || "Lapped"}</span>
+                          <span>
+                            {index === 0 ? "Race duration" : "Time Difference"} <b>{driver.Time?.time || "Lapped"}</b>
+                          </span>
+                        </p>
+                        <p className="flex items-center space-x-2 border-b-2 border-gray-100 py-2">
+                          <Zap size={16} />
+                          <span className={`${driver.FastestLap.rank === "1" && "text-purple-600"}`}>
+                            Fastest lap: <b>{driver.FastestLap.Time.time}</b>
+                          </span>
+                        </p>
+                        <p className="flex items-center space-x-2 pt-2">
+                          <Gauge size={16} />
+                          <span>
+                            Average speed of{" "}
+                            <b>
+                              {driver.FastestLap.AverageSpeed.speed}
+                              {driver.FastestLap.AverageSpeed.units}
+                            </b>
+                          </span>
                         </p>
                       </div>
                     </div>
