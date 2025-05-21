@@ -7,7 +7,7 @@ import { motion } from "framer-motion";
 const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
 export default function CalendarView({ races, onRaceClick }: { races: Race[]; onRaceClick: (race: Race /* trackId: number */) => void }) {
-  const [currentDate, setCurrentDate] = useState(new Date());
+  const [currentDate, setCurrentDate] = useState(new Date(2024, 2, 1));
 
   const handlePrevMonth = () => {
     setCurrentDate((prev) => new Date(prev.getFullYear(), prev.getMonth() - 1, 1));
